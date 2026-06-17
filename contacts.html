@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты | ADR Эксперт Познань</title>
+    <meta name="description" content="Свяжитесь с Dangerous Goods Academy для консультации по обучению ADR в Познани.">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Контакты | Dangerous Goods Academy">
+    <meta property="og:description" content="Свяжитесь с нами для записи на курсы ADR.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/ADRExpert/website/main/og-image.jpg">
+    <meta property="og:url" content="https://dga-poznan.pl/contacts.html">
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+    <style>
+        /* --- Variables --- */
+        :root {
+            --color-primary: #F27B41;
+            --color-primary-hover: #e0692d;
+            --color-secondary: #EBEBEB;
+            --color-secondary-hover: #d1d1d1;
+            --color-text-light: #EBEBEB;
+            --color-text-dark: #191919;
+            --color-text-muted: #b0b0b0;
+            --font-main: 'Inter', sans-serif;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2.5rem;
+            --spacing-xl: 4rem;
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
+            --transition: 300ms ease;
+        }
+
+        /* --- Resets & Base --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--color-text-light);
+            background-color: #191919;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1440px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 var(--spacing-xl);
+        }
+
+        /* --- Header --- */
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: var(--spacing-sm) 0;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--color-text-light);
+            transition: opacity var(--transition);
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .logo__icon {
+            height: 60px;
+            width: auto;
+        }
+
+        .logo__text {
+            font-size: 1.4rem;
+            /* Specific scaling to match the text stack to the height of the logo */
+            line-height: 1.2;
+            font-weight: 700;
+            letter-spacing: 0;
+            text-transform: uppercase;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding-bottom: 3px;
+            margin-top: 14px;
+        }
+
+        .nav {
+            display: flex;
+            margin-left: auto;
+            margin-right: 2rem;
+        }
+
+        .nav__list {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav__link {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--color-text-light);
+            transition: color var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav__link:hover {
+            color: var(--color-primary);
+        }
+
+        .nav__item {
+            position: relative;
+            padding: 10px 0;
+        }
+
+        .nav__dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: #222222;
+            min-width: 200px;
+            border-radius: var(--border-radius-md);
+            padding: 0.75rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav__item:hover .nav__dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .nav__dropdown-link {
+            display: block;
+            padding: 0.6rem 1rem;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            border-radius: 6px;
+            transition: all var(--transition);
+        }
+
+        .nav__dropdown-link:hover {
+            background: rgba(242, 123, 65, 0.1);
+            color: var(--color-primary);
+        }
+
+        .header__action {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: 0.875rem 1.75rem;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            transition: all var(--transition);
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn--primary {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+        }
+
+        .btn--primary:hover {
+            background-color: var(--color-primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn--sm {
+            padding: 0.6rem 1.25rem;
+            font-size: 0.95rem;
+        }
+
+        /* --- Lang Switcher --- */
+        .lang-switcher {
+            position: relative;
+        }
+
+        .lang-switcher__btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color-text-light);
+            padding: 0.5rem 0.8rem;
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all var(--transition);
+        }
+
+        .lang-switcher__btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-switcher__dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: #222;
+            border-radius: var(--border-radius-md);
+            padding: 0.5rem;
+            min-width: 160px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 1000;
+        }
+
+        .lang-switcher.active .lang-switcher__dropdown {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lang-switcher__item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.6rem 0.8rem;
+            color: var(--color-text-muted);
+            border-radius: 6px;
+            transition: all var(--transition);
+        }
+
+        .lang-switcher__item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        /* --- Page Header --- */
+        .contacts-header {
+            padding: 160px 0 60px;
+            background: #151515;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .section-desc {
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* --- Contacts Content --- */
+        .contacts-content {
+            padding: var(--spacing-xl) 0;
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 992px) {
+            .contacts-grid {
+                grid-template-columns: 1fr 1.5fr;
+            }
+        }
+
+        .contact-info-card {
+            background: #222;
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .info-group {
+            margin-bottom: 2rem;
+        }
+
+        .info-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .info-desc {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            margin-top: 0.5rem;
+            line-height: 1.6;
+        }
+
+        /* --- Online Kontakt Form --- */
+        .online-kontakt {
+            background: #1a1a1a;
+            padding: 3rem;
+            border-radius: 30px;
+            color: #fff;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(242, 123, 65, 0.2);
+        }
+
+        .online-kontakt__title {
+            text-align: left;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .online-kontakt__subtitle {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2.5rem;
+            display: block;
+        }
+
+        .c-form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #888;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Image shows a red-ish accent */
+
+        .contact-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .c-form-group {
+            margin-bottom: 1rem;
+        }
+
+        .c-input {
+            width: 100%;
+            background: #252525;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            color: #fff;
+            font-family: var(--font-main);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .c-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background: #2a2a2a;
+            box-shadow: 0 0 0 4px rgba(242, 123, 65, 0.15);
+        }
+
+        .c-submit-btn {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 1.125rem;
+            font-size: 1.1rem;
+            background: var(--color-primary);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .c-submit-btn:hover {
+            background: var(--color-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(242, 123, 65, 0.4);
+        }
+
+        /* --- Animations --- */
+        .animate-up {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .animate-up.in-view {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 {
+            animation-delay: 0.15s;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            padding: var(--spacing-xl) 0 var(--spacing-lg);
+            background-color: #111111;
+            color: var(--color-text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer__grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 2fr;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .footer__brand {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .footer__logo .logo__icon {
+            height: 50px;
+        }
+
+        .footer__firm-data {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--color-text-muted);
+        }
+
+        .footer__firm-data p {
+            margin-bottom: 4px;
+        }
+
+        .footer__firm-data strong {
+            color: var(--color-text-light);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .footer__nav-title {
+            color: var(--color-text-light);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-md);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer__nav-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer__nav-link {
+            font-size: 0.95rem;
+            transition: color var(--transition);
+        }
+
+        .footer__nav-link:hover {
+            color: var(--color-primary);
+        }
+
+        .footer__map {
+            width: 100%;
+            height: 250px;
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer__map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: grayscale(1) invert(0.9) contrast(1.2);
+        }
+
+        .footer__bottom {
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .footer__legal {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        @media (max-width: 1024px) {
+            .footer__grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer__grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+            .footer__bottom {
+                flex-direction: column;
+                gap: var(--spacing-md);
+                text-align: center;
+            }
+        }
+
+        /* Scroll Top Button */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--color-primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(242, 123, 65, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--transition);
+            z-index: 1000;
+        }
+
+        .scroll-top-btn.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Modal (Success) */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal__container {
+            background: #1e1e1e;
+            padding: 3rem;
+            border-radius: var(--border-radius-lg);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal__success-icon {
+            font-size: 4rem;
+            color: #4ade80;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- === HEADER === -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="dgawhite.svg" alt="DGA Logo" class="logo__icon">
+                <span class="logo__text">
+                    <span>Dangerous Goods Academy</span>
+                    <span
+                        style="font-size: 1.50rem; color: var(--color-primary); margin-top: 4px; font-weight: bold; text-transform: none; display: block; line-height: 1.2;">YEVHENII
+                        MEDVID</span>
+                </span>
+            </a>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="programs.html" class="nav__link">Программы <iconify-icon
+                                icon="solar:alt-arrow-down-linear" width="16"></iconify-icon></a>
+                        <div class="nav__dropdown">
+                            <a href="programs.html#basic" class="nav__dropdown-link">Базовый</a>
+                            <a href="programs.html#tanks" class="nav__dropdown-link">Цистерны</a>
+                            <a href="programs.html#class1" class="nav__dropdown-link">Класс 1</a>
+                            <a href="programs.html#class7" class="nav__dropdown-link">Класс 7</a>
+                        </div>
+                    </li>
+                    <li class="nav__item"><a href="approach.html" class="nav__link">Наш подход</a></li>
+                    <li class="nav__item"><a href="about.html" class="nav__link">О нас</a></li>
+                    <li class="nav__item"><a href="contacts.html" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="header__action">
+                <div class="lang-switcher" id="langSwitcher">
+                    <button class="lang-switcher__btn">
+                        <iconify-icon icon="twemoji:flag-russia" class="flag-icon"></iconify-icon>
+                        <span>RU</span>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" width="14"></iconify-icon>
+                    </button>
+                    <div class="lang-switcher__dropdown">
+                        <a href="#" class="lang-switcher__item active" data-lang="ru">
+                            <iconify-icon icon="twemoji:flag-russia" class="flag-icon"></iconify-icon>
+                            <span>Русский (RU)</span>
+                        </a>
+                        <a href="#" class="lang-switcher__item" data-lang="uk">
+                            <iconify-icon icon="twemoji:flag-ukraine" class="flag-icon"></iconify-icon>
+                            <span>Українська (UA)</span>
+                        </a>
+                        <a href="#" class="lang-switcher__item" data-lang="pl">
+                            <iconify-icon icon="twemoji:flag-poland" class="flag-icon"></iconify-icon>
+                            <span>Polski (PL)</span>
+                        </a>
+                        <a href="#" class="lang-switcher__item" data-lang="en">
+                            <iconify-icon icon="twemoji:flag-united-kingdom" class="flag-icon"></iconify-icon>
+                            <span>English (EN)</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="#" class="btn btn--primary btn--sm" id="headerRequestBtn">Оставить заявку <iconify-icon
+                        icon="solar:arrow-right-up-linear" width="18"></iconify-icon></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="contacts-header">
+            <div class="container animate-up">
+                <h1 class="section-title">Свяжитесь с нами</h1>
+                <p class="section-desc">Мы всегда на связи и готовы ответить на любые ваши вопросы по обучению и
+                    консалтингу ADR.</p>
+            </div>
+        </section>
+
+        <section class="contacts-content">
+            <div class="container">
+                <div class="contacts-grid">
+                    <!-- Contact Info -->
+                    <div class="animate-up">
+                        <div class="contact-info-card">
+                            <div class="info-group">
+                                <div class="info-label">Телефон</div>
+                                <div class="info-value"><a href="tel:+48572377732" style="color: inherit; transition: color var(--transition);" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='#fff'">+48 572 377 732</a></div>
+                                <div class="info-value" style="margin-top: 5px;"><a href="tel:+48511520562" style="color: inherit; transition: color var(--transition);" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='#fff'">+48 511 520 562</a></div>
+                                <div class="info-desc" style="margin-top: 10px;">Звоните нам или пишите в WhatsApp для быстрой консультации.</div>
+                            </div>
+                            <div class="info-group">
+                                <div class="info-label">Email</div>
+                                <div class="info-value">dgayevheniimedvid@gmail.com</div>
+                                <div class="info-desc">Для официальных запросов и предложений сотрудничества.</div>
+                            </div>
+                            <div class="info-group">
+                                <div class="info-label">Адрес</div>
+                                <div class="info-value">Wołkowyska 17, 61-132 Poznań</div>
+                                <div class="info-desc">Наш офис в Познани, где проходят основные занятия.</div>
+                            </div>
+                            <div class="info-group">
+                                <div class="info-label">Данные компании</div>
+                                <div class="info-desc">
+                                    NIP: 7822915383<br>
+                                    REGON: 524105260<br>
+                                    KRS: 0001011540
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="animate-up delay-1">
+                        <div class="online-kontakt">
+                            <h2 class="online-kontakt__title">Оставить заявку</h2>
+                            <span class="online-kontakt__subtitle">Заполните форму, и мы свяжемся с вами в течение 15 минут для консультации.</span>
+                            <form id="contactForm" novalidate>
+                                <div class="contact-form-grid">
+                                    <div class="c-form-group">
+                                        <label class="c-form-label">Ваше имя</label>
+                                        <input type="text" name="name" class="c-input form-input" placeholder="Иван Иванов"
+                                            required>
+                                    </div>
+                                    <div class="c-form-group">
+                                        <label class="c-form-label">Телефон</label>
+                                        <input type="tel" name="phone" class="c-input form-input"
+                                            placeholder="+48 XXX XXX XXX" required>
+                                    </div>
+                                </div>
+                                <div class="c-form-group">
+                                    <label class="c-form-label">Электронная почта</label>
+                                    <input type="email" name="email" class="c-input form-input"
+                                        placeholder="example@mail.com" required>
+                                </div>
+                                <div class="c-form-group">
+                                    <label class="c-form-label">Курс</label>
+                                    <select name="course" class="c-input form-input" required>
+                                        <option value="" disabled selected>Выберите курс</option>
+                                        <option value="Базовый курс">Базовый курс</option>
+                                        <option value="Специализированный: Цистерны">Специализированный: Цистерны</option>
+                                        <option value="Специализированный: Класс 1">Специализированный: Класс 1</option>
+                                        <option value="Специализированный: Класс 7">Специализированный: Класс 7</option>
+                                    </select>
+                                </div>
+                                <div class="c-form-group">
+                                    <label class="c-form-label">Дата (ближайший курс)</label>
+                                    <select name="date" class="c-input form-input" required>
+                                        <option value="" disabled selected>Выберите дату</option>
+                                        <option value="15 марта">15 марта</option>
+                                        <option value="30 марта">30 марта</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="c-submit-btn">Отправить заявку</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Success Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal__container">
+            <iconify-icon icon="solar:check-circle-bold" class="modal__success-icon"></iconify-icon>
+            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Спасибо!</h2>
+            <p style="color: var(--color-text-muted); margin-bottom: 2rem;">Ваше сообщение успешно отправлено. Мы
+                ответим вам в самое ближайшее время.</p>
+            <button class="btn btn--primary"
+                onclick="this.closest('.modal').classList.remove('active')">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- === FOOTER === -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="#" class="footer__logo">
+                        <img src="dgawhite.svg" alt="ADR Expert" class="logo__icon">
+                    </a>
+                    <div class="footer__firm-data">
+                        <strong>Dangerous Goods Academy</strong>
+                        <p>Специализированная школа подготовки водителей и консультации в сфере опасных грузов.</p>
+                        <p style="margin-top: 15px;"><iconify-icon icon="solar:phone-bold"
+                                style="vertical-align: middle; color: var(--color-primary);"></iconify-icon> +48 572 377 732</p>
+                        <p style="margin-top: 5px;"><iconify-icon icon="solar:phone-bold"
+                                style="vertical-align: middle; color: var(--color-primary);"></iconify-icon> +48 511 520 562</p>
+                        <p style="margin-top: 5px;"><iconify-icon icon="solar:letter-bold"
+                                style="vertical-align: middle; color: var(--color-primary);"></iconify-icon> dgayevheniimedvid@gmail.com</p>
+                        <div style="margin-top: 15px; font-size: 0.8rem; opacity: 0.7;">
+                            <p>NIP: 7822915383</p>
+                            <p>REGON: 524105260</p>
+                            <p>KRS: 0001011540</p>
+                        </div>
+                        <p style="margin-top: 20px; font-size: 0.75rem; line-height: 1.4; font-style: italic;">
+                            Обучение проводится согласно закону от 19 августа 2011 года о перевозке опасных грузов.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="footer__nav">
+                    <h4 class="footer__nav-title">Обучение</h4>
+                    <ul class="footer__nav-list">
+                        <li><a href="programs.html" class="footer__nav-link">Курсы ADR</a></li>
+                        <li><a href="programs.html" class="footer__nav-link">Стоимость</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__nav">
+                    <h4 class="footer__nav-title">Компания</h4>
+                    <ul class="footer__nav-list">
+                        <li><a href="approach.html" class="footer__nav-link">Наш подход</a></li>
+                        <li><a href="#faq" class="footer__nav-link">Частые вопросы</a></li>
+                        <li><a href="contacts.html" class="footer__nav-link">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__location">
+                    <h4 class="footer__nav-title">Наш адрес</h4>
+                    <div class="footer__map">
+                        <iframe
+                            src="https://maps.google.com/maps?q=DGA+Yevhenii+Medvid+ADR+courses,+Pozna%C5%84&hl=ru&z=16&output=embed"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: var(--color-text-muted);">
+                        Wołkowyska 17, Poznan, 61-132, Poland
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copyright">&copy; 2026 Dangerous Goods Academy - Poznań. Все права защищены.</p>
+                <div class="footer__legal">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button class="scroll-top-btn" id="scrollTopBtn">
+        <iconify-icon icon="solar:alt-arrow-up-bold"></iconify-icon>
+    </button>
+
+    <script src="script.js"></script>
+    <script src="js/translation.js"></script>
+</body>
+
+</html>

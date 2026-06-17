@@ -1,0 +1,2771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADR Эксперт | Обучение и Консалтинг</title>
+    <meta name="description"
+        content="Специализированная школа подготовки водителей и консультации в сфере опасных грузов (ADR) в Познани.">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Dangerous Goods Academy | ADR Эксперт Познань">
+    <meta property="og:description"
+        content="Профессиональное обучение водителей ADR, консультации и помощь в оформлении документов.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/ADRExpert/website/main/og-image.jpg">
+    <!-- Placeholder for production, or local path for testing -->
+    <meta property="og:url" content="https://dga-poznan.pl">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+    <style>
+        /* --- Variables --- */
+        :root {
+            --color-primary: #F27B41;
+            --color-primary-hover: #e0692d;
+            --color-secondary: #EBEBEB;
+            --color-secondary-hover: #d1d1d1;
+            --color-text-light: #EBEBEB;
+            --color-text-dark: #191919;
+            --color-text-muted: #b0b0b0;
+
+            --font-main: 'Inter', sans-serif;
+
+            --spacing-xs: 0.5rem;
+            /* 8px */
+            --spacing-sm: 1rem;
+            /* 16px */
+            --spacing-md: 1.5rem;
+            /* 24px */
+            --spacing-lg: 2.5rem;
+            /* 40px */
+            --spacing-xl: 4rem;
+            /* 64px */
+
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
+
+            --transition: 300ms ease;
+        }
+
+        /* --- Resets & Base --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--color-text-light);
+            background-color: #191919;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- Layout --- */
+        .container {
+            max-width: 1440px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 var(--spacing-xl);
+        }
+
+        /* --- Header --- */
+        .header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: var(--spacing-sm) 0;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--color-text-light);
+            transition: opacity var(--transition);
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .logo__icon {
+            height: 60px;
+            width: auto;
+        }
+
+        .logo__text {
+            font-size: 1.4rem;
+            /* Specific scaling to match the text stack to the height of the logo */
+            line-height: 1.2;
+            font-weight: 700;
+            letter-spacing: 0;
+            text-transform: uppercase;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding-bottom: 3px;
+            margin-top: 14px;
+        }
+
+        .nav {
+            display: flex;
+            margin-left: auto;
+            margin-right: 2rem;
+        }
+
+        .nav__list {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav__link {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            transition: color var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav__link:hover {
+            color: var(--color-text-light);
+        }
+
+        .nav__item {
+            position: relative;
+        }
+
+        .nav__dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #222;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-md);
+            padding: 0.5rem 0;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.2s ease;
+            z-index: 1000;
+        }
+
+        .nav__item:hover .nav__dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .nav__dropdown-link {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .nav__dropdown-link:hover {
+            color: var(--color-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .header__action {
+            display: flex;
+            align-items: center;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-text-light);
+            cursor: pointer;
+            transition: transform var(--transition);
+        }
+
+        .mobile-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: 0.875rem 1.75rem;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all var(--transition);
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn--sm {
+            padding: 0.6rem 1.25rem;
+            font-size: 0.95rem;
+        }
+
+        .btn--primary {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+        }
+
+        .btn--primary:hover {
+            background-color: var(--color-primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(242, 123, 65, 0.4);
+        }
+
+        .btn--secondary {
+            background-color: var(--color-secondary);
+            color: var(--color-text-dark);
+        }
+
+        .btn--secondary:hover {
+            background-color: var(--color-secondary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.1) 100%),
+                linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 20%),
+                url('hero-bg.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero .container {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero__content {
+            max-width: 650px;
+            margin-top: -40px;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .hero__subtitle {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .hero__title {
+            font-size: 4rem;
+            line-height: 1.15;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            letter-spacing: -0.02em;
+        }
+
+        .hero__desc {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-lg);
+            max-width: 600px;
+        }
+
+        .hero__actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        /* --- Video Card --- */
+        .video-card {
+            position: absolute;
+            bottom: var(--spacing-xl);
+            left: var(--spacing-xl);
+            display: flex;
+            align-items: center;
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: var(--border-radius-lg);
+            padding: 0.875rem 0.875rem 0.875rem 1.5rem;
+            gap: var(--spacing-md);
+            cursor: pointer;
+            transition: transform var(--transition), background var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .video-card:hover {
+            transform: translateY(-4px);
+            background: rgba(40, 40, 40, 0.8);
+        }
+
+        .video-card__info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .video-card__title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1.3;
+        }
+
+        .video-card__subtitle {
+            font-size: 0.8rem;
+            color: #b0b0b0;
+        }
+
+        .video-card__thumbnail {
+            width: 110px;
+            height: 75px;
+            border-radius: var(--border-radius-md);
+            background: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=400&q=80') center/cover no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .video-card__thumbnail::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            transition: background var(--transition);
+        }
+
+        .video-card:hover .video-card__thumbnail::before {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .video-card__play {
+            position: relative;
+            z-index: 2;
+            color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+            transition: transform var(--transition), color var(--transition);
+        }
+
+        .video-card:hover .video-card__play {
+            transform: scale(1.15);
+            color: #fff;
+        }
+
+        /* --- Animations --- */
+        .animate-up {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .animate-up.in-view {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .animate-fade {
+            opacity: 0;
+        }
+
+        .animate-fade.in-view {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.15s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.45s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* --- Services 3-Card Grid --- */
+        .services {
+            padding: var(--spacing-xl) 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .services__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        .service-card {
+            position: relative;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-lg);
+            text-decoration: none;
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(25, 25, 25, 0.95) 0%, rgba(25, 25, 25, 0.6) 40%, rgba(25, 25, 25, 0) 80%);
+            z-index: 1;
+            transition: background var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(242, 123, 65, 0.2);
+            border-color: rgba(242, 123, 65, 0.3);
+        }
+
+        .service-card:hover::before {
+            background: linear-gradient(to top, rgba(25, 25, 25, 0.98) 0%, rgba(25, 25, 25, 0.7) 50%, rgba(25, 25, 25, 0.1) 90%);
+        }
+
+        .service-card__bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+            filter: brightness(0.8);
+        }
+
+        .service-card:hover .service-card__bg {
+            transform: scale(1.08);
+            filter: brightness(1);
+        }
+
+        .service-card__content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        .service-card__title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--color-text-light);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.25rem;
+        }
+
+        .service-card__desc {
+            color: var(--color-text-muted);
+            font-size: 1.05rem;
+            line-height: 1.5;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .service-card__link {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--color-text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-card__link iconify-icon {
+            transition: transform var(--transition);
+        }
+
+        .service-card:hover .service-card__link iconify-icon {
+            transform: translateX(6px);
+        }
+
+        /* --- Section Headers --- */
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            letter-spacing: -0.02em;
+            color: var(--color-text-light);
+        }
+
+        .section-desc {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--color-text-muted);
+        }
+
+        /* --- Features 5-Card Grid --- */
+        .features {
+            padding: var(--spacing-xl) 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .features__grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        .feature-card {
+            background: #222222;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            transition: transform var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .feature-card__visual {
+            background: #151515;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-md);
+            min-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .feature-card--small .feature-card__visual {
+            min-height: 160px;
+        }
+
+        .feature-card__title {
+            font-size: 1.35rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-card__desc {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        /* Grid Placement */
+        .card-1 {
+            grid-column: span 5;
+        }
+
+        .card-2 {
+            grid-column: span 7;
+        }
+
+        .card-3 {
+            grid-column: span 6;
+        }
+
+        .card-4 {
+            grid-column: span 6;
+        }
+
+        /* Custom Visuals: Card 1 - Focus */
+        .visual-focus {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 180px;
+        }
+
+        .focus-sources {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .focus-pill {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 2;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+        }
+
+        .focus-pill:hover {
+            box-shadow: 0 0 15px rgba(242, 123, 65, 0.4);
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+            color: var(--color-text-light);
+            cursor: pointer;
+        }
+
+        .focus-target {
+            width: 50px;
+            height: 50px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 25px rgba(242, 123, 65, 0.6);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            border: 3px solid #151515;
+        }
+
+        /* Removed decorative line as it's no longer needed for the centered layout */
+
+        /* Custom Visuals: Card 2 - Dashboard */
+        .visual-dash {
+            width: 100%;
+            padding: var(--spacing-lg);
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .dash-panel {
+            background: #222222;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1.25rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+
+        .feature-card:hover .dash-panel {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(242, 123, 65, 0.15);
+            border-color: rgba(242, 123, 65, 0.3);
+        }
+
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+
+        .dash-metric {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-text-light);
+        }
+
+        .dash-chart {
+            height: 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+        }
+
+        .dash-bar {
+            flex: 1;
+            background: var(--color-primary);
+            border-radius: 4px 4px 0 0;
+            opacity: 0.6;
+            transition: opacity 0.6s ease, filter 0.6s ease;
+        }
+
+        .feature-card:hover .dash-bar {
+            opacity: 1;
+            filter: drop-shadow(0 0 8px rgba(242, 123, 65, 0.6));
+        }
+
+        /* Custom Visuals: Card 3 - Corporate Training (Puzzle Match Style) */
+        .visual-puzzle-match {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #151515;
+        }
+
+        /* --- Анимация пазлов для Card 3 --- */
+        .match-illustration {
+            position: relative;
+            height: 130px;
+            width: 160px;
+        }
+
+        .m-puzzle-piece {
+            width: 65px;
+            height: 65px;
+            /* Изменено на сплошной цвет для идеального слияния фигур */
+            background: #222222;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            position: absolute;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Начальное положение: раздвинуты в стороны */
+        .m-puzzle-left {
+            left: 0;
+            transform: translateX(-10px);
+            z-index: 5;
+        }
+
+        /* Выступ пазла (левая часть) */
+        .m-puzzle-left::after {
+            content: '';
+            position: absolute;
+            right: -12px;
+            /* Выдвигаем наружу */
+            top: 50%;
+            transform: translateY(-50%);
+            /* Идеальное центрирование */
+            width: 13px;
+            /* 1px для перекрытия правой рамки родителя */
+            height: 24px;
+            background: #222222;
+            /* Строго как у тела пазла */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: none;
+            /* Убираем левую границу, чтобы слилось с телом */
+            border-radius: 0 24px 24px 0;
+            /* Форма ровного полукруга */
+            z-index: 6;
+        }
+
+        .m-puzzle-right {
+            right: 0;
+            transform: translateX(10px);
+            z-index: 4;
+        }
+
+        /* Выемка пазла (правая часть) */
+        .m-puzzle-right::before {
+            content: '';
+            position: absolute;
+            left: -1px;
+            /* Смещаем на 1px влево, чтобы стереть левую рамку родителя */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 13px;
+            height: 24px;
+            background: #151515;
+            /* Цвет фона блока, чтобы сымитировать "дырку" */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: none;
+            border-radius: 0 24px 24px 0;
+            z-index: 6;
+            box-shadow: inset -1px 0 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .m-connection-lines {
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .m-heart-badge {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 25px rgba(242, 123, 65, 0.6);
+            z-index: 20;
+            border: 3px solid #151515;
+            transition: transform 0.5s ease;
+        }
+
+        /* --- ЭФФЕКТ ПРИ НАВЕДЕНИИ НА КАРТОЧКУ (Оптимизировано) --- */
+        .feature-card:hover .m-puzzle-left {
+            transform: translateX(15px);
+        }
+
+        .feature-card:hover .m-puzzle-right {
+            transform: translateX(-15px);
+        }
+
+        .feature-card:hover .m-connection-lines {
+            opacity: 1;
+        }
+
+        .feature-card:hover .m-heart-badge {
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        .m-heart-icon {
+            width: 24px;
+            height: 24px;
+            fill: #ffffff;
+        }
+
+        /* Custom Visuals: Card 4 - Scanner Card */
+        .illustration-scanner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: #161616;
+        }
+
+        .bracket {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .bracket.tl {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 8px 0 0 0;
+        }
+
+        .bracket.tr {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+            border-radius: 0 8px 0 0;
+        }
+
+        .bracket.bl {
+            bottom: 20px;
+            left: 20px;
+            border-right: none;
+            border-top: none;
+            border-radius: 0 0 0 8px;
+        }
+
+        .bracket.br {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+            border-radius: 0 0 8px 0;
+        }
+
+        .f-star {
+            display: none;
+        }
+
+        .profile-ui {
+            background: rgba(30, 30, 35, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+            width: 220px;
+            overflow: hidden;
+        }
+
+        .f-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: var(--color-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            box-shadow: 0 0 15px rgba(242, 123, 65, 0.3);
+        }
+
+        .f-avatar svg {
+            width: 28px;
+            height: 28px;
+            fill: #ffffff;
+        }
+
+        .info-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-bullet {
+            width: 6px;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+        }
+
+        .info-line {
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+        }
+
+        .info-line.w-full {
+            width: 100%;
+        }
+
+        .info-line.w-80 {
+            width: 80%;
+        }
+
+        .info-line.w-60 {
+            width: 60%;
+        }
+
+        .scanner-beam {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(242, 123, 65, 0.1) 80%, rgba(242, 123, 65, 0.3) 100%);
+            border-right: 2px solid var(--color-primary);
+            box-shadow: 2px 0 15px rgba(242, 123, 65, 0.4);
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        @keyframes scan {
+            0% {
+                left: -50px;
+            }
+
+            100% {
+                left: 120%;
+            }
+        }
+
+        .feature-card:hover .scanner-beam {
+            opacity: 1;
+            animation: scan 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        /* Custom Visuals: Card 5 - Security */
+        .visual-shield {
+            font-size: 5rem;
+            color: var(--color-primary);
+            filter: drop-shadow(0 0 20px rgba(242, 123, 65, 0.4));
+            z-index: 2;
+            position: relative;
+        }
+
+        @keyframes pulseRing {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0.95);
+                opacity: 0.5;
+            }
+        }
+
+        .shield-bg {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 1px solid rgba(242, 123, 65, 0.3);
+            border-radius: 20px;
+            transform: rotate(45deg);
+        }
+
+        .feature-card:hover .shield-bg {
+            animation: pulseRing 3s infinite ease-in-out;
+        }
+
+        .shield-bg:nth-child(2) {
+            width: 140px;
+            height: 140px;
+            border-color: rgba(242, 123, 65, 0.1);
+        }
+
+        .feature-card:hover .shield-bg:nth-child(2) {
+            animation-delay: -1.5s;
+        }
+
+        /* --- Pricing Section --- */
+        .pricing {
+            padding: var(--spacing-xl) 0;
+            background-color: var(--color-bg);
+            position: relative;
+            z-index: 10;
+        }
+
+        .pricing__grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-lg);
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: #222222;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-lg);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(242, 123, 65, 0.1);
+            border-color: rgba(242, 123, 65, 0.3);
+        }
+
+        .pricing-card__img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .pricing-card__img--1 {
+            object-position: center 70%;
+        }
+
+        .pricing-card__img--2 {
+            object-position: center 56%;
+        }
+
+        .pricing-card__img--3 {
+            object-position: center 56%;
+        }
+
+        .pricing-card__img--4 {
+            object-position: center 70%;
+        }
+
+        .pricing-card__body {
+            padding: var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .pricing-card__header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .pricing-card__icon {
+            font-size: 2.25rem;
+            color: var(--color-primary);
+            background: rgba(242, 123, 65, 0.1);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(242, 123, 65, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pricing-card__title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text-light);
+            letter-spacing: -0.02em;
+        }
+
+        .pricing-card__desc {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-md);
+            flex-grow: 1;
+        }
+
+        .pricing-card__meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            padding-top: var(--spacing-md);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .pricing-card__date {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pricing-card__price {
+            display: flex;
+            align-items: baseline;
+            gap: 0.3rem;
+            color: var(--color-primary);
+        }
+
+        .price-value {
+            font-size: 1.75rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .price-currency {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .pricing-card__actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-top: auto;
+        }
+
+        .pricing-card__actions .btn {
+            flex: 1;
+            justify-content: center;
+            padding: 0.75rem 1rem;
+            font-size: 0.95rem;
+        }
+
+        /* --- FAQ Section --- */
+        .faq {
+            padding: var(--spacing-xl) 0;
+            background-color: var(--color-bg);
+            position: relative;
+            z-index: 10;
+        }
+
+        .faq__grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--spacing-xl);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faq__heading {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--color-text-light);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            position: sticky;
+            top: 2rem;
+            align-self: start;
+        }
+
+        .faq__accordion {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-item:first-child {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-question {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) 0;
+            background: none;
+            border: none;
+            color: var(--color-text-light);
+            font-size: 1.05rem;
+            font-weight: 500;
+            text-align: left;
+            cursor: pointer;
+            transition: color var(--transition);
+        }
+
+        .faq-question:hover {
+            color: var(--color-primary);
+        }
+
+        .faq-icon {
+            color: var(--color-text-muted);
+            font-size: 1.25rem;
+            transition: transform 0.3s ease, color var(--transition);
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+            color: var(--color-primary);
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--color-primary);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .faq-answer-inner {
+            padding-bottom: var(--spacing-md);
+            color: var(--color-text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+            padding-right: 2rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            /* arbitrary high value for transition */
+        }
+
+        /* --- Social Media Section --- */
+        .social {
+            padding: var(--spacing-xl) 0;
+            background-color: var(--color-bg);
+            position: relative;
+            z-index: 10;
+        }
+
+        .social__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        .social-card {
+            border-radius: 30px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 380px;
+            transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .social-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(242, 123, 65, 0.25),
+                0 0 20px 0 rgba(242, 123, 65, 0.15);
+            border-color: rgba(242, 123, 65, 0.3);
+        }
+
+        .social-card--instagram {
+            background: linear-gradient(135deg, #fff5f8 0%, #ffeef2 100%);
+            /* Light Pink for Instagram */
+        }
+
+        .social-card--facebook {
+            background: #E7F3FF;
+            /* Light Blue for Facebook */
+        }
+
+        .social-card--whatsapp {
+            background: #E8F9EE;
+            /* Light Green for WhatsApp */
+        }
+
+        .social-card__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .social-card__icon {
+            font-size: 2.5rem;
+            transition: filter var(--transition);
+        }
+
+        .social-card--facebook .social-card__icon,
+        .social-card--whatsapp .social-card__icon {
+            filter: grayscale(1) brightness(0);
+        }
+
+        .social-card__logo {
+            height: 35px;
+            width: auto;
+            opacity: 0.8;
+            filter: grayscale(1) brightness(0);
+            /* Black logo for light cards */
+        }
+
+
+        .social-card__content {
+            flex-grow: 1;
+        }
+
+        .social-card__title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .social-card__desc {
+            font-size: 1.05rem;
+            color: #444;
+            line-height: 1.5;
+            max-width: 240px;
+        }
+
+        .social-card__footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .social-card__btn {
+            background: #111;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all var(--transition);
+        }
+
+        .social-card:hover .social-card__btn {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        /* --- Footer --- */
+        .footer {
+            padding: var(--spacing-xl) 0 var(--spacing-lg);
+            background-color: #111111;
+            color: var(--color-text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer__grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 2fr;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .footer__brand {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .footer__logo .logo__icon {
+            height: 50px;
+        }
+
+        .footer__firm-data {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--color-text-muted);
+        }
+
+        .footer__firm-data p {
+            margin-bottom: 4px;
+        }
+
+        .footer__firm-data strong {
+            color: var(--color-text-light);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .footer__nav-title {
+            color: var(--color-text-light);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-md);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer__nav-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer__nav-link {
+            font-size: 0.95rem;
+            transition: color var(--transition);
+        }
+
+        .footer__nav-link:hover {
+            color: var(--color-primary);
+        }
+
+        .footer__map {
+            width: 100%;
+            height: 250px;
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer__map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: grayscale(1) invert(0.9) contrast(1.2);
+            /* Dark map effect */
+        }
+
+        .footer__bottom {
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .footer__legal {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        /* --- Language Switcher --- */
+        .lang-switcher {
+            position: relative;
+            margin-right: 1.5rem;
+            z-index: 100;
+        }
+
+        .lang-switcher__btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color-text-light);
+            padding: 0.5rem 0.75rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .lang-switcher__btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--color-primary);
+        }
+
+        .lang-switcher__btn iconify-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .lang-switcher.active .lang-switcher__btn iconify-icon[icon="solar:alt-arrow-down-linear"] {
+            transform: rotate(180deg);
+        }
+
+        .lang-switcher__dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background: #252525;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            min-width: 160px;
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            z-index: 1000;
+        }
+
+        .lang-switcher.active .lang-switcher__dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-switcher__item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.75rem 1rem;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .lang-switcher__item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--color-text-light);
+        }
+
+        .lang-switcher__item.active {
+            color: var(--color-primary);
+            background: rgba(242, 123, 65, 0.05);
+        }
+
+        .flag-icon {
+            font-size: 1.25rem;
+            border-radius: 3px;
+        }
+
+        /* --- Modal --- */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal__container {
+            background-color: #1a1a1a;
+            width: 100%;
+            max-width: 500px;
+            padding: 3rem;
+            border-radius: 30px;
+            position: relative;
+            transform: translateY(40px) scale(0.95);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(242, 123, 65, 0.2);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal.active .modal__container {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal__close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal__close:hover {
+            background: var(--color-primary);
+            transform: rotate(90deg);
+        }
+
+        .modal__title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .modal__subtitle {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #888;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input {
+            width: 100%;
+            background: #252525;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background: #2a2a2a;
+            box-shadow: 0 0 0 4px rgba(242, 123, 65, 0.15);
+        }
+
+        .form-input.error {
+            border-color: #ff4d4d;
+            background: rgba(255, 77, 77, 0.05);
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .form-input.error+.error-message {
+            display: block;
+        }
+
+        .modal__submit {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 1.125rem;
+            font-size: 1.1rem;
+        }
+
+        /* Checkbox Styling */
+        .form-checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            cursor: pointer;
+        }
+
+        .form-checkbox {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            background: #252525;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+            top: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .form-checkbox:checked {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        .form-checkbox:checked::after {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 1px;
+            width: 6px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .form-checkbox-label {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            line-height: 1.4;
+        }
+
+        .form-checkbox-label a {
+            color: var(--color-primary);
+            text-decoration: underline;
+        }
+
+        .form-checkbox.error {
+            border-color: #ff4d4d;
+        }
+
+        /* Success State */
+        .modal__success {
+            display: none;
+            text-align: center;
+            padding: 2rem 0;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .modal__success-icon {
+            font-size: 5rem;
+            color: var(--color-primary);
+            animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .modal__success-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .modal__success-text {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        @keyframes bounceIn {
+            from {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+
+            50% {
+                opacity: 0.9;
+                transform: scale(1.1);
+            }
+
+            80% {
+                opacity: 1;
+                transform: scale(0.89);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 1024px) {
+            .footer__grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .nav {
+                margin-left: 2rem;
+            }
+
+            .hero__title {
+                font-size: 3.25rem;
+            }
+
+            .container {
+                padding: 0 var(--spacing-lg);
+            }
+
+            .video-card {
+                bottom: var(--spacing-lg);
+                left: var(--spacing-lg);
+            }
+
+            .services__grid {
+                gap: var(--spacing-md);
+            }
+
+            .features__grid {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .nav,
+            .header__action {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .hero__title {
+                font-size: 2.5rem;
+            }
+
+            .footer__grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+
+            .footer__bottom {
+                flex-direction: column;
+                gap: var(--spacing-md);
+                text-align: center;
+            }
+
+            .hero__desc {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-desc {
+                font-size: 1rem;
+            }
+
+            .social__grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+
+            .social-card {
+                min-height: 320px;
+                padding: 1.5rem;
+            }
+
+            .services__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero__actions {
+                flex-direction: column;
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .btn {
+                justify-content: center;
+            }
+
+            .video-card {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                margin-top: var(--spacing-xl);
+                max-width: max-content;
+            }
+
+            .hero__content {
+                margin-top: 0;
+            }
+
+            .pricing__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq__grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+
+            .faq__heading {
+                position: static;
+                margin-bottom: var(--spacing-md);
+            }
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: var(--spacing-lg);
+            right: var(--spacing-lg);
+            width: 50px;
+            height: 50px;
+            background-color: var(--color-primary);
+            color: var(--color-text-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(242, 123, 65, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--transition);
+            z-index: 1000;
+        }
+
+        .scroll-top-btn.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-top-btn:hover {
+            background-color: var(--color-primary-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(242, 123, 65, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- === HEADER === -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="dgawhite.svg" alt="DGA Logo" class="logo__icon">
+                <span class="logo__text">
+                    <span>Dangerous Goods Academy</span>
+                    <span
+                        style="font-size: 1.50rem; color: var(--color-primary); margin-top: 4px; font-weight: bold; text-transform: none; display: block; line-height: 1.2;">YEVHENII
+                        MEDVID</span>
+                </span>
+            </a>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="programs.html" class="nav__link">Программы <iconify-icon
+                                icon="solar:alt-arrow-down-linear" width="16"></iconify-icon></a>
+                        <div class="nav__dropdown">
+                            <a href="programs.html#basic" class="nav__dropdown-link">Базовый</a>
+                            <a href="programs.html#tanks" class="nav__dropdown-link">Цистерны</a>
+                            <a href="programs.html#class1" class="nav__dropdown-link">Класс 1</a>
+                            <a href="programs.html#class7" class="nav__dropdown-link">Класс 7</a>
+                        </div>
+                    </li>
+                    <li class="nav__item"><a href="approach.html" class="nav__link">Наш подход</a></li>
+                    <li class="nav__item"><a href="about.html" class="nav__link">О нас</a></li>
+                    <li class="nav__item"><a href="contacts.html" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="header__action">
+                <div class="lang-switcher" id="langSwitcher">
+                    <button class="lang-switcher__btn">
+                        <iconify-icon icon="twemoji:flag-ukraine" class="flag-icon"></iconify-icon>
+                        <span>UA</span>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" width="14"></iconify-icon>
+                    </button>
+                    <div class="lang-switcher__dropdown">
+                        <a href="#" class="lang-switcher__item active" data-lang="ru">
+                            <iconify-icon icon="twemoji:flag-ukraine" class="flag-icon"></iconify-icon>
+                            <span>Русский (RU)</span>
+                        </a>
+                        <a href="#" class="lang-switcher__item" data-lang="uk">
+                            <iconify-icon icon="twemoji:flag-ukraine" class="flag-icon"></iconify-icon>
+                            <span>Українська (UA)</span>
+                        </a>
+                        <a href="#" class="lang-switcher__item" data-lang="pl">
+                            <iconify-icon icon="twemoji:flag-poland" class="flag-icon"></iconify-icon>
+                            <span>Polski (PL)</span>
+                        </a>
+                        <a href="#" class="lang-switcher__item" data-lang="en">
+                            <iconify-icon icon="twemoji:flag-united-kingdom" class="flag-icon"></iconify-icon>
+                            <span>English (EN)</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="#" class="btn btn--primary btn--sm">Оставить заявку <iconify-icon
+                        icon="solar:arrow-right-up-linear" width="18"></iconify-icon></a>
+            </div>
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-toggle" aria-label="Open Menu">
+                <iconify-icon icon="solar:hamburger-menu-linear" width="28"></iconify-icon>
+            </button>
+        </div>
+    </header>
+
+    <!-- === MAIN CONTENT === -->
+    <main>
+        <!-- === HERO SECTION === -->
+        <section class="hero" id="hero">
+            <div class="container">
+                <div class="hero__content">
+                    <p class="hero__subtitle animate-up">DGA Poznań - Повышаем стандарты безопасности ADR.</p>
+                    <h1 class="hero__title animate-up delay-1">Профессиональное обучение ADR</h1>
+                    <p class="hero__desc animate-up delay-2">Мы предоставляем полный спектр услуг по обучению водителей,
+                        специалистов и комплексному консультированию предприятий в сфере международной дорожной
+                        перевозки опасных грузов.</p>
+
+                    <div class="hero__actions animate-up delay-3">
+                        <a href="#" class="btn btn--primary">Связаться с нами <iconify-icon
+                                icon="solar:arrow-right-up-linear" width="20"></iconify-icon></a>
+                        <a href="programs.html" class="btn btn--secondary">Выбрать курс <iconify-icon
+                                icon="solar:arrow-right-up-linear" width="20"
+                                style="color: var(--color-text-dark);"></iconify-icon></a>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+
+        <!-- === FEATURES SECTION === -->
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-header animate-up">
+                    <h2 class="section-title">Почему Мы?</h2>
+                    <p class="section-desc">Мы стремимся обеспечить максимальную безопасность и высочайший
+                        профессионализм в сфере перевозки опасных грузов на каждом этапе работы.</p>
+                </div>
+                <div class="features__grid">
+
+                    <!-- Card 1: Narrow Focus -->
+                    <div class="feature-card card-1 animate-up delay-2">
+                        <div class="feature-card__visual">
+                            <div class="visual-focus">
+                                <div class="focus-sources">
+                                    <div class="focus-pill"><iconify-icon icon="solar:document-bold-duotone"
+                                            style="color: var(--color-primary);" width="24" height="24"></iconify-icon>
+                                        Базовый</div>
+                                    <div class="focus-pill"><iconify-icon icon="solar:bus-bold-duotone"
+                                            style="color: var(--color-primary);" width="24" height="24"></iconify-icon>
+                                        Цистерны</div>
+                                    <div class="focus-pill"><iconify-icon icon="solar:bomb-bold-duotone"
+                                            style="color: var(--color-primary);" width="24" height="24"></iconify-icon>
+                                        Класс 1</div>
+                                    <div class="focus-pill"><iconify-icon icon="mdi:radioactive"
+                                            style="color: var(--color-primary);" width="24" height="24"></iconify-icon>
+                                        Класс 7</div>
+                                </div>
+                                <div class="focus-target">
+                                    <iconify-icon icon="solar:shield-check-bold" width="28" height="28"
+                                        color="#fff"></iconify-icon>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feature-card__content">
+                            <h3 class="feature-card__title">Узконаправленная школа</h3>
+                            <p class="feature-card__desc">Наш 100% фокус — исключительно подготовка водителей и
+                                специалистов по перевозке опасных грузов ADR.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Modern Methods / Dashboards -->
+                    <div class="feature-card card-2 animate-up delay-3">
+                        <div class="feature-card__visual">
+                            <div class="visual-dash">
+                                <div class="dash-panel">
+                                    <div class="dash-header">
+                                        <span>Успеваемость водителей</span>
+                                        <span style="color: #4ade80;">+95% сдача</span>
+                                    </div>
+                                    <div class="dash-metric">99% ADR</div>
+                                    <div class="dash-chart">
+                                        <div class="dash-bar" style="height: 40%"></div>
+                                        <div class="dash-bar" style="height: 60%"></div>
+                                        <div class="dash-bar" style="height: 80%"></div>
+                                        <div class="dash-bar" style="height: 100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feature-card__content">
+                            <h3 class="feature-card__title">Современная методика</h3>
+                            <p class="feature-card__desc">Высокоэффективные учебные материалы и онлайн-тренажеры,
+                                гарантирующие успешную сдачу с первого раза.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Corporate Training (Wide) -->
+                    <div class="feature-card feature-card--small card-3 animate-up delay-4">
+                        <div class="feature-card__visual">
+                            <div class="visual-puzzle-match">
+                                <div class="match-illustration">
+                                    <div class="m-puzzle-piece m-puzzle-left">
+                                        <iconify-icon icon="solar:buildings-bold" class="m-match-icon" width="30"
+                                            height="30"></iconify-icon>
+                                    </div>
+                                    <div class="m-puzzle-piece m-puzzle-right">
+                                        <iconify-icon icon="solar:bus-bold" class="m-match-icon" width="30"
+                                            height="30"></iconify-icon>
+                                    </div>
+                                    <div class="m-connection-lines">
+                                        <div class="m-line-left"></div>
+                                        <div class="m-line-right"></div>
+                                    </div>
+                                    <div class="m-heart-badge">
+                                        <iconify-icon icon="mdi:deal" class="m-center-icon" width="30"
+                                            height="30"></iconify-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feature-card__content">
+                            <h3 class="feature-card__title">Корпоративное обучение</h3>
+                            <p class="feature-card__desc">Проводим профессиональную подготовку водителей прямо на базе
+                                вашего предприятия. Индивидуальный график и выезд инструкторов в любую точку региона.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Review Dating Profile -->
+                    <div class="feature-card feature-card--small card-4 animate-up delay-4">
+                        <div class="feature-card__visual">
+                            <div class="illustration-scanner">
+                                <div class="bracket tl"></div>
+                                <div class="bracket tr"></div>
+                                <div class="bracket bl"></div>
+                                <div class="bracket br"></div>
+
+                                <div class="profile-ui">
+                                    <div class="scanner-beam"></div>
+
+                                    <div class="f-avatar">
+                                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                                        </svg>
+                                    </div>
+
+                                    <div class="info-lines">
+                                        <div class="info-row">
+                                            <div class="info-bullet"></div>
+                                            <div class="info-line w-full"></div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-bullet"></div>
+                                            <div class="info-line w-80"></div>
+                                        </div>
+                                        <div class="info-row">
+                                            <div class="info-bullet"></div>
+                                            <div class="info-line w-60"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feature-card__content">
+                            <h3 class="feature-card__title">Комплексная помощь</h3>
+                            <p class="feature-card__desc">Полная поддержка на пути к квалификации: от помощи в сборе
+                                документов для записи на курсы до успешного прохождения аттестации.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- === PRICING SECTION === -->
+        <section class="pricing" id="pricing">
+            <div class="container">
+                <div class="section-header animate-up">
+                    <h2 class="section-title">Расписание и стоимость (Март 2026)</h2>
+                    <p class="section-desc">Выберите подходящий курс для обучения. Мы предлагаем прозрачные условия
+                        оформления без скрытых платежей.</p>
+                </div>
+                <div class="pricing__grid">
+
+                    <!-- Card 1 -->
+                    <div class="pricing-card animate-up delay-1">
+                        <img src="m_basowy.jpg" alt="Базовый" class="pricing-card__img pricing-card__img--1">
+                        <div class="pricing-card__body">
+                            <div class="pricing-card__header">
+                                <div class="pricing-card__icon">
+                                    <iconify-icon icon="solar:document-text-bold-duotone" width="32"></iconify-icon>
+                                </div>
+                                <h3 class="pricing-card__title">Базовый</h3>
+                            </div>
+                            <p class="pricing-card__desc">Обязательный курс для получения свидетельства ADR.
+                                Охватывает основные правила, классификацию и методы безопасности.</p>
+                            <div class="pricing-card__meta">
+                                <div class="pricing-card__date">
+                                    <iconify-icon icon="solar:calendar-bold-duotone"></iconify-icon>
+                                    02.04.2026 - 06.04.2026
+                                </div>
+                                <div class="pricing-card__price-wrapper"
+                                    style="display: flex; flex-direction: column; align-items: flex-end;">
+                                    <div class="pricing-card__price">
+                                        <span class="price-value">750</span>
+                                        <span class="price-currency">zł</span>
+                                    </div>
+                                    <div class="pricing-card__duration"
+                                        style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 4px; display: flex; align-items: center; gap: 4px;">
+                                        <iconify-icon icon="solar:clock-circle-bold"></iconify-icon> <span>18 часов (3
+                                            дня)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-card__actions">
+                                <a href="#" class="btn btn--primary" data-course="Базовый курс">Оставить заявку</a>
+                                <a href="programs.html#basic" class="btn btn--secondary btn--sm">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="pricing-card animate-up delay-2">
+                        <img src="m_cystern.jpg" alt="Цистерны" class="pricing-card__img pricing-card__img--2">
+                        <div class="pricing-card__body">
+                            <div class="pricing-card__header">
+                                <div class="pricing-card__icon">
+                                    <iconify-icon icon="solar:bus-bold-duotone" width="32"></iconify-icon>
+                                </div>
+                                <h3 class="pricing-card__title">Цистерны</h3>
+                            </div>
+                            <p class="pricing-card__desc">Специализированный курс по перевозке опасных грузов в
+                                автоцистернах, контейнерах-цистернах и батареях.</p>
+                            <div class="pricing-card__meta">
+                                <div class="pricing-card__date">
+                                    <iconify-icon icon="solar:calendar-bold-duotone"></iconify-icon>
+                                    09.04.2026 - 13.04.2026
+                                </div>
+                                <div class="pricing-card__price-wrapper"
+                                    style="display: flex; flex-direction: column; align-items: flex-end;">
+                                    <div class="pricing-card__price">
+                                        <span class="price-value">600</span>
+                                        <span class="price-currency">zł</span>
+                                    </div>
+                                    <div class="pricing-card__duration"
+                                        style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 4px; display: flex; align-items: center; gap: 4px;">
+                                        <iconify-icon icon="solar:clock-circle-bold"></iconify-icon> <span>12 часов (2
+                                            дня)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-card__actions">
+                                <a href="#" class="btn btn--primary" data-course="Специализированный: Цистерны">Оставить
+                                    заявку</a>
+                                <a href="programs.html#tanks" class="btn btn--secondary btn--sm">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="pricing-card animate-up delay-3">
+                        <img src="m_klass1.jpg" alt="Класс 1" class="pricing-card__img pricing-card__img--3">
+                        <div class="pricing-card__body">
+                            <div class="pricing-card__header">
+                                <div class="pricing-card__icon">
+                                    <iconify-icon icon="solar:bomb-bold-duotone" width="32"></iconify-icon>
+                                </div>
+                                <h3 class="pricing-card__title">Класс 1</h3>
+                            </div>
+                            <p class="pricing-card__desc">Перевозка взрывчатых веществ и изделий. Строгие протоколы
+                                безопасности и особенности документации.</p>
+                            <div class="pricing-card__meta">
+                                <div class="pricing-card__date">
+                                    <iconify-icon icon="solar:calendar-bold-duotone"></iconify-icon>
+                                    16.04.2026 - 18.04.2026
+                                </div>
+                                <div class="pricing-card__price-wrapper"
+                                    style="display: flex; flex-direction: column; align-items: flex-end;">
+                                    <div class="pricing-card__price">
+                                        <span class="price-value">550</span>
+                                        <span class="price-currency">zł</span>
+                                    </div>
+                                    <div class="pricing-card__duration"
+                                        style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 4px; display: flex; align-items: center; gap: 4px;">
+                                        <iconify-icon icon="solar:clock-circle-bold"></iconify-icon> <span>8 часов (1
+                                            день)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-card__actions">
+                                <a href="#" class="btn btn--primary" data-course="Специализированный: Класс 1">Оставить
+                                    заявку</a>
+                                <a href="programs.html#class1" class="btn btn--secondary btn--sm">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="pricing-card animate-up delay-4">
+                        <img src="m_klass7.jpg" alt="Класс 7" class="pricing-card__img pricing-card__img--4">
+                        <div class="pricing-card__body">
+                            <div class="pricing-card__header">
+                                <div class="pricing-card__icon">
+                                    <iconify-icon icon="mdi:radioactive" width="32"></iconify-icon>
+                                </div>
+                                <h3 class="pricing-card__title">Класс 7</h3>
+                            </div>
+                            <p class="pricing-card__desc">Транспортировка радиоактивных материалов. Защита от излучения
+                                и специфические требования к упаковке.</p>
+                            <div class="pricing-card__meta">
+                                <div class="pricing-card__date">
+                                    <iconify-icon icon="solar:calendar-bold-duotone"></iconify-icon>
+                                    23.04.2026 - 25.04.2026
+                                </div>
+                                <div class="pricing-card__price-wrapper"
+                                    style="display: flex; flex-direction: column; align-items: flex-end;">
+                                    <div class="pricing-card__price">
+                                        <span class="price-value">550</span>
+                                        <span class="price-currency">zł</span>
+                                    </div>
+                                    <div class="pricing-card__duration"
+                                        style="font-size: 0.85rem; color: var(--color-text-muted); margin-top: 4px; display: flex; align-items: center; gap: 4px;">
+                                        <iconify-icon icon="solar:clock-circle-bold"></iconify-icon> <span>8 часов (1
+                                            день)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-card__actions">
+                                <a href="#" class="btn btn--primary" data-course="Специализированный: Класс 7">Оставить
+                                    заявку</a>
+                                <a href="programs.html#class7" class="btn btn--secondary btn--sm">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- === FAQ SECTION === -->
+        <section class="faq" id="faq">
+            <div class="container">
+                <div class="faq__grid animate-up">
+                    <h2 class="faq__heading">Часто задаваемые вопросы</h2>
+
+                    <div class="faq__accordion">
+
+                        <div class="faq-item">
+                            <button class="faq-question">Какие документы нужны для записи на курс ADR? <iconify-icon
+                                    icon="solar:add-square-linear" class="faq-icon"></iconify-icon></button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">Для старта обучения вам потребуется лишь ваш паспорт,
+                                    действующее водительское удостоверение, и цветное фото (3.5×4.5 см)</div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">Как долго длится обучение на базовый курс и курс по
+                                цистернам? <iconify-icon icon="solar:add-square-linear"
+                                    class="faq-icon"></iconify-icon></button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">Базовый курс (ADR Podstawowy) обычно занимает 3 дня (18
+                                    академических часов). Специализированный курс по цистернам (ADR
+                                    Cysterny) требует 2 дня обучения (12 акад. часов). Класс 1 и Класс 7
+                                    сопровождаются 8 часами.</div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">На каком языке проходит обучение и сдача экзамена?
+                                <iconify-icon icon="solar:add-square-linear" class="faq-icon"></iconify-icon></button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">Мы обучаем на том языке, который удобен именно вам:
+                                    английском, русском или украинском. На нем же вы сможете проходить все этапы
+                                    программы, чтобы чувствовать себя максимально уверенно.</div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">Каков точный срок действия сертификата ADR?
+                                <iconify-icon icon="solar:add-square-linear" class="faq-icon"></iconify-icon></button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">Оригинальное свидетельство ADR (заверенное во всех странах
+                                    ЕС) действительно в течение ровно 5 лет с даты успешной сдачи квалификационного
+                                    экзамена. Чтобы его продлить, нужно пройти курс переподготовки.</div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">Как проходит финальный экзамен после окончания курса?
+                                <iconify-icon icon="solar:add-square-linear" class="faq-icon"></iconify-icon></button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">Экзамен проходит в формате строгого письменного
+                                    тестирования в присутствии государственной региональной комиссии. Вопросы имеют
+                                    форму sinlge choice (тест с вариантами ответов, один из которых правильный).
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">Вы оказываете помощь в трудоустройстве после курсов?
+                                <iconify-icon icon="solar:add-square-linear" class="faq-icon"></iconify-icon></button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">Да! Наш центр плотно сотрудничает с десятками крупных
+                                    логистических и транспортных компаний по всей Европе. Успешных выпускников,
+                                    продемонстрировавших высокий профессионализм, мы регулярно рекомендуем своим
+                                    партнерам по их запросам.</div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">Можно ли пройти теоретическую часть курса онлайн (Zoom)?
+                                <iconify-icon icon="solar:add-square-linear" class="faq-icon"></iconify-icon></button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">К сожалению, по актуальным жестким требованиям
+                                    европейского законодательства и транспортной инспекции, все курсы ADR для
+                                    водителей требуют 100% обязательного очного присутствия кандидата на занятиях с
+                                    фиксацией в журнале посещений.</div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">Что будет, если я не сдам государственный экзамен с первого
+                                раза? <iconify-icon icon="solar:add-square-linear"
+                                    class="faq-icon"></iconify-icon></button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">Ничего страшного, это бывает. Вы имеете полное право
+                                    на пересдачу (с небольшим административным сбором). Мы бесплатно проанализируем
+                                    ваши ошибки с предыдущего экзамена и дадим дополнительные тренировочные тесты
+                                    для стопроцентной готовности ко второй попытке.</div>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">Могут ли водители, у которых нет Кода 95, начинать обучение по
+                                ADR? <iconify-icon icon="solar:add-square-linear"
+                                    class="faq-icon"></iconify-icon></button>
+                            <div class="faq-answer">
+                                <div class="faq-answer-inner">Да, Код 95 для этого не требуется, так как это два
+                                    абсолютно разных документа. Вы можете спокойно пройти курс, сдать экзамен и получить
+                                    международное свидетельство ADR, а оформлением Кода 95 заняться позже.</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- === SOCIAL SECTION === -->
+        <section class="social" id="social">
+            <div class="container">
+                <div class="social__grid">
+
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/dangerousgoods_academy?fbclid=IwY2xjawQ1FNJleHRuA2FlbQIxMABzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeB4fadRj_NmduGEXRv_yuHYcRWJWf7UoxbyFbFypdhGW6RIgGvPKkhw8aNnE_aem_L0PhJCqopu7A0sxa6rqjvA"
+                        target="_blank" class="social-card social-card--instagram animate-up delay-1">
+                        <div class="social-card__header">
+                            <iconify-icon icon="logos:instagram-icon" class="social-card__icon"></iconify-icon>
+                        </div>
+                        <div class="social-card__content">
+                            <h3 class="social-card__title">Instagram</h3>
+                            <p class="social-card__desc">Следите за нашими буднями и анонсами курсов в реальном
+                                времени.</p>
+                        </div>
+                        <div class="social-card__footer">
+                            <span class="social-card__btn">Подписаться</span>
+                        </div>
+                    </a>
+
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/dangerousgoodsacadem?rdid=2IE0Tikn3a2FRGGL&share_url=https%253A%252F%252Fwww.facebook.com%252Fshare%252F16wiuKXKCe%252F#"
+                        target="_blank" class="social-card social-card--facebook animate-up delay-2">
+                        <div class="social-card__header">
+                            <iconify-icon icon="ri:facebook-circle-fill" class="social-card__icon"></iconify-icon>
+                        </div>
+                        <div class="social-card__content">
+                            <h3 class="social-card__title">Facebook</h3>
+                            <p class="social-card__desc">Сообщество профессионалов и важные новости законодательства
+                                ADR.</p>
+                        </div>
+                        <div class="social-card__footer">
+                            <span class="social-card__btn">Присоединиться</span>
+                        </div>
+                    </a>
+
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/48572377732" target="_blank"
+                        class="social-card social-card--whatsapp animate-up delay-3">
+                        <div class="social-card__header">
+                            <iconify-icon icon="ri:whatsapp-fill" class="social-card__icon"></iconify-icon>
+                        </div>
+                        <div class="social-card__content">
+                            <h3 class="social-card__title">WhatsApp</h3>
+                            <p class="social-card__desc">Быстрая консультация и запись на курсы в один клик через
+                                мессенджер.</p>
+                        </div>
+                        <div class="social-card__footer">
+                            <span class="social-card__btn">Написать нам</span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- === FOOTER === -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="#" class="footer__logo">
+                        <img src="dgawhite.svg" alt="ADR Expert" class="logo__icon">
+                    </a>
+                    <div class="footer__firm-data">
+                        <strong>Dangerous Goods Academy</strong>
+                        <p>Специализированная школа подготовки водителей и консультации в сфере опасных грузов.</p>
+                        <p style="margin-top: 15px;"><iconify-icon icon="solar:phone-bold"
+                                style="vertical-align: middle; color: var(--color-primary);"></iconify-icon> +48 572 377
+                            732</p>
+                        <p style="margin-top: 5px;"><iconify-icon icon="solar:phone-bold"
+                                style="vertical-align: middle; color: var(--color-primary);"></iconify-icon> +48 511 520
+                            562</p>
+                        <p style="margin-top: 5px;"><iconify-icon icon="solar:letter-bold"
+                                style="vertical-align: middle; color: var(--color-primary);"></iconify-icon>
+                            dgayevheniimedvid@gmail.com</p>
+                        <div style="margin-top: 15px; font-size: 0.8rem; opacity: 0.7;">
+                            <p>NIP: 7822915383</p>
+                            <p>REGON: 524105260</p>
+                            <p>KRS: 0001011540</p>
+                        </div>
+                        <p style="margin-top: 20px; font-size: 0.75rem; line-height: 1.4; font-style: italic;">
+                            Обучение проводится согласно закону от 19 августа 2011 года о перевозке опасных грузов.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="footer__nav">
+                    <h4 class="footer__nav-title">Обучение</h4>
+                    <ul class="footer__nav-list">
+                        <li><a href="programs.html" class="footer__nav-link">Курсы ADR</a></li>
+                        <li><a href="programs.html" class="footer__nav-link">Стоимость</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__nav">
+                    <h4 class="footer__nav-title">Компания</h4>
+                    <ul class="footer__nav-list">
+                        <li><a href="approach.html" class="footer__nav-link">Наш подход</a></li>
+                        <li><a href="#faq" class="footer__nav-link">Частые вопросы</a></li>
+                        <li><a href="contacts.html" class="footer__nav-link">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__location">
+                    <h4 class="footer__nav-title">Наш адрес</h4>
+                    <div class="footer__map">
+                        <iframe
+                            src="https://maps.google.com/maps?q=DGA+Yevhenii+Medvid+ADR+courses,+Pozna%C5%84&hl=ru&z=16&output=embed"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <p style="font-size: 0.9rem; margin-top: 10px; color: var(--color-text-muted);">
+                        Wołkowyska 17, Poznan, 61-132, Poland
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copyright">&copy; 2026 Dangerous Goods Academy - Poznań. Все права защищены.</p>
+                <div class="footer__legal">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- === MODAL CONTACT FORM === -->
+    <div class="modal" id="contactModal">
+        <div class="modal__container">
+            <button class="modal__close" id="closeModal">
+                <iconify-icon icon="solar:close-circle-bold"></iconify-icon>
+            </button>
+
+            <!-- Form Content -->
+            <div id="modalFormContent">
+                <h2 class="modal__title">Оставить заявку</h2>
+                <p class="modal__subtitle">Заполните форму, и мы свяжемся с вами в течение 15 минут для консультации.
+                </p>
+
+                <form id="contactForm" novalidate>
+                    <div class="form-group">
+                        <label class="form-label">Ваше имя</label>
+                        <input type="text" name="name" class="form-input" placeholder="Иван Иванов" required>
+                        <div class="error-message">Пожалуйста, введите ваше имя</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Телефон</label>
+                        <input type="tel" name="phone" class="form-input" placeholder="+48 XXX XXX XXX" required>
+                        <div class="error-message">Введите корректный номер телефона</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Электронная почта</label>
+                        <input type="email" name="email" class="form-input" placeholder="example@mail.com" required>
+                        <div class="error-message">Введите корректный email адрес</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Курс</label>
+                        <select name="course" class="form-input"
+                            style="background-color: #222; color: #fff; cursor: pointer; appearance: auto;" required>
+                            <option value="" disabled selected>Выберите курс</option>
+                            <option value="Базовый курс">Базовый вариант</option>
+                            <option value="Специализированный: Цистерны">Цистерны</option>
+                            <option value="Специализированный: Класс 1">Класс 1</option>
+                            <option value="Специализированный: Класс 7">Класс 7</option>
+                        </select>
+                        <div class="error-message">Пожалуйста, выберите курс</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Дата</label>
+                        <select name="date" class="form-input"
+                            style="background-color: #222; color: #fff; cursor: pointer; appearance: auto;" required>
+                            <option value="" disabled selected>Выберите дату</option>
+                            <option value="15 марта">15 марта</option>
+                            <option value="30 марта">30 марта</option>
+                        </select>
+                        <div class="error-message">Пожалуйста, выберите дату</div>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary modal__submit">Отправить заявку</button>
+                </form>
+            </div>
+
+            <!-- Success Content -->
+            <div class="modal__success" id="modalSuccessContent">
+                <iconify-icon icon="solar:check-circle-bold" class="modal__success-icon"></iconify-icon>
+                <h2 class="modal__success-title">Спасибо!</h2>
+                <p class="modal__success-text">Мы получили вашу заявку. Наш специалист свяжется с вами в ближайшее
+                    время.</p>
+                <button class="btn btn--secondary" style="margin-top: 1rem;"
+                    onclick="location.reload()">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top">
+        <iconify-icon icon="solar:alt-arrow-up-bold"></iconify-icon>
+    </button>
+
+    <script src="script.js"></script>
+    <script src="js/translation.js"></script>
+</body>
+
+</html>
