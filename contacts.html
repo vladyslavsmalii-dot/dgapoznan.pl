@@ -861,7 +861,7 @@
             .contact-form-grid {
                 grid-template-columns: 1fr;
             }
-            .contact-hero {
+            .contacts-header {
                 padding: 100px 0 40px 0 !important;
             }
             .section-title {
@@ -869,6 +869,7 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="mobile.css">
 </head>
 
 <body>
@@ -922,7 +923,7 @@
                         </a>
                     </div>
                 </div>
-                <a href="#" class="btn btn--primary btn--sm" id="headerRequestBtn">Оставить заявку <iconify-icon
+                <a href="#contact-form" class="btn btn--primary btn--sm" id="headerRequestBtn">Оставить заявку <iconify-icon
                         icon="solar:arrow-right-up-linear" width="18"></iconify-icon></a>
             </div>
         </div>
@@ -972,7 +973,7 @@
 
                     <!-- Contact Form -->
                     <div class="animate-up delay-1">
-                        <div class="online-kontakt">
+                        <div class="online-kontakt" id="contact-form">
                             <h2 class="online-kontakt__title">Оставить заявку</h2>
                             <span class="online-kontakt__subtitle">Заполните форму, и мы свяжемся с вами в течение 15 минут для консультации.</span>
                             <form id="contactForm" novalidate>

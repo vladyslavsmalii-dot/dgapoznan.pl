@@ -34,6 +34,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 ? 'solar:close-circle-linear'
                 : 'solar:hamburger-menu-linear');
             document.documentElement.classList.toggle('scroll-locked', isOpen);
+            if (!isOpen) {
+                header.querySelectorAll('.nav__item.submenu-open').forEach(item => {
+                    item.classList.remove('submenu-open');
+                    const trigger = item.querySelector('.nav__link');
+                    if (trigger) trigger.setAttribute('aria-expanded', 'false');
+                });
+            }
         };
 
         mobileToggle.setAttribute('aria-expanded', 'false');
@@ -48,12 +55,31 @@ document.addEventListener("DOMContentLoaded", () => {
         header.querySelectorAll('.nav__link, .nav__dropdown-link, .header__action .btn').forEach(link => {
             link.addEventListener('click', (e) => {
                 const href = link.getAttribute('href');
+                const parentItem = link.closest('.nav__item');
+                const submenu = parentItem && parentItem.querySelector('.nav__dropdown');
+
+                if (submenu && link.classList.contains('nav__link') && window.innerWidth <= 768) {
+                    e.preventDefault();
+                    const isExpanded = parentItem.classList.toggle('submenu-open');
+                    link.setAttribute('aria-expanded', String(isExpanded));
+                    return;
+                }
+
                 setMenuOpen(false);
                 if (href === '#') {
                     e.preventDefault();
                     if (typeof openModal === 'function') openModal(e);
                 }
             });
+        });
+
+        header.querySelectorAll('.nav__item').forEach(item => {
+            const submenu = item.querySelector('.nav__dropdown');
+            const trigger = item.querySelector('.nav__link');
+            if (submenu && trigger) {
+                trigger.setAttribute('aria-haspopup', 'true');
+                trigger.setAttribute('aria-expanded', 'false');
+            }
         });
 
         document.addEventListener('keydown', (e) => {
@@ -99,7 +125,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalSuccessContent = document.getElementById('modalSuccessContent');
 
     const openModal = (e) => {
-        if (e && e.target.tagName === 'A' && e.target.getAttribute('href') !== '#') return;
+        const trigger = e && e.currentTarget;
+        if (trigger && trigger.tagName === 'A' && trigger.getAttribute('href') !== '#') return;
         if (e) e.preventDefault();
         if (modal) {
             // Check for data-course to pre-select it
