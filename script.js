@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const isContactsPage = window.location.pathname.includes('contacts.html');
 
-                fetch("/api/contact", {
+                fetch("https://dgapoznan-pl.vercel.app/api/contact", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json; charset=utf-8"
