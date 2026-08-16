@@ -20,69 +20,53 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Mobile Menu Drawer Logic
+    // Mobile menu
     const mobileToggle = document.querySelector('.mobile-toggle');
     const header = document.querySelector('.header');
 
     if (mobileToggle && header) {
-        let mobileOverlay = document.querySelector('.mobile-menu-overlay');
+        const setMenuOpen = (isOpen) => {
+            header.classList.toggle('menu-open', isOpen);
+            mobileToggle.setAttribute('aria-expanded', String(isOpen));
+            mobileToggle.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
+            const icon = mobileToggle.querySelector('iconify-icon');
+            if (icon) icon.setAttribute('icon', isOpen
+                ? 'solar:close-circle-linear'
+                : 'solar:hamburger-menu-linear');
+            document.documentElement.classList.toggle('scroll-locked', isOpen);
+        };
 
-        if (!mobileOverlay) {
-            mobileOverlay = document.createElement('div');
-            mobileOverlay.className = 'mobile-menu-overlay';
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        mobileToggle.setAttribute('type', 'button');
+        mobileToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setMenuOpen(!header.classList.contains('menu-open'));
+        });
 
-            const nav = header.querySelector('.nav');
-            const headerAction = header.querySelector('.header__action');
-
-            mobileOverlay.innerHTML = `
-                <button class="mobile-menu-close" aria-label="Close Menu">
-                    <iconify-icon icon="solar:close-circle-bold" width="36"></iconify-icon>
-                </button>
-                <div class="mobile-menu-content">
-                    ${nav ? nav.outerHTML : ''}
-                    ${headerAction ? headerAction.outerHTML : ''}
-                </div>
-            `;
-
-            document.body.appendChild(mobileOverlay);
-
-            const closeBtn = mobileOverlay.querySelector('.mobile-menu-close');
-            if (closeBtn) {
-                closeBtn.addEventListener('click', () => {
-                    mobileOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            }
-
-            // Handle mobile lang switcher inside overlay
-            const mobileLangSwitcher = mobileOverlay.querySelector('.lang-switcher');
-            if (mobileLangSwitcher) {
-                const btn = mobileLangSwitcher.querySelector('.lang-switcher__btn');
-                if (btn) {
-                    btn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        mobileLangSwitcher.classList.toggle('active');
-                    });
+        // Close on link click
+        header.querySelectorAll('.nav__link, .nav__dropdown-link, .header__action .btn').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                setMenuOpen(false);
+                if (href === '#') {
+                    e.preventDefault();
+                    if (typeof openModal === 'function') openModal(e);
                 }
-            }
-
-            // Close menu on link clicks
-            mobileOverlay.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    const href = link.getAttribute('href');
-                    mobileOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                    if (href === '#') {
-                        e.preventDefault();
-                        if (typeof openModal === 'function') openModal(e);
-                    }
-                });
             });
-        }
+        });
 
-        mobileToggle.addEventListener('click', () => {
-            mobileOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && header.classList.contains('menu-open')) {
+                setMenuOpen(false);
+                mobileToggle.focus();
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && header.classList.contains('menu-open')) {
+                setMenuOpen(false);
+            }
         });
     }
 
@@ -132,14 +116,14 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            document.documentElement.classList.add('scroll-locked');
         }
     };
 
     const closeModal = () => {
         if (modal) {
             modal.classList.remove('active');
-            document.body.style.overflow = '';
+            document.documentElement.classList.remove('scroll-locked');
             setTimeout(() => {
                 if (modalFormContent) modalFormContent.style.display = 'block';
                 if (modalSuccessContent) modalSuccessContent.style.display = 'none';
@@ -248,16 +232,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 5. Scroll Top Logic
     const scrollTopBtn = document.getElementById('scrollTopBtn');
-    const featuresSection = document.getElementById('features') || document.querySelector('.programs-content');
-
-    if (scrollTopBtn && featuresSection) {
+    if (scrollTopBtn) {
+        let ticking = false;
         window.addEventListener('scroll', () => {
-            if (window.scrollY > featuresSection.offsetTop - 100) {
-                scrollTopBtn.classList.add('visible');
-            } else {
-                scrollTopBtn.classList.remove('visible');
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    if (window.scrollY > 400) {
+                        scrollTopBtn.classList.add('visible');
+                    } else {
+                        scrollTopBtn.classList.remove('visible');
+                    }
+                    ticking = false;
+                });
+                ticking = true;
             }
-        });
+        }, { passive: true });
 
         scrollTopBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -297,9 +286,12 @@ document.addEventListener("DOMContentLoaded", () => {
         tabs.forEach(tab => {
             tab.addEventListener('click', (e) => {
                 e.preventDefault();
-                const target = tab.dataset.target;
-                history.pushState(null, null, `#${target}`);
-                window.showTab(target);
+                const btn = e.currentTarget;
+                const target = btn ? btn.dataset.target : null;
+                if (target) {
+                    history.pushState(null, null, `#${target}`);
+                    window.showTab(target);
+                }
             });
         });
 

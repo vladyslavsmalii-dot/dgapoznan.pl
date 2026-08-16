@@ -55,8 +55,14 @@
 
         /* --- Resets & Base --- */
         html {
-            overflow-x: hidden;
+            overflow-x: clip;
+            overflow-y: auto;
             width: 100%;
+        }
+
+        html.scroll-locked,
+        html.scroll-locked body {
+            overflow: hidden;
         }
 
         body {
@@ -64,7 +70,6 @@
             color: var(--color-text-light);
             background-color: #191919;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
             width: 100%;
             position: relative;
         }
@@ -2022,6 +2027,59 @@
            MOBILE STYLES (Scoped strictly to max-width: 768px)
            ========================================================= */
         @media (max-width: 768px) {
+            .modal {
+                align-items: flex-start;
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                padding: max(1rem, env(safe-area-inset-top)) 1rem max(1rem, env(safe-area-inset-bottom));
+            }
+
+            .modal__container {
+                width: 100%;
+                max-width: 500px;
+                margin: auto;
+                padding: 1.5rem 1.25rem;
+                border-radius: 18px;
+            }
+
+            .modal__close {
+                top: 0.75rem;
+                right: 0.75rem;
+            }
+
+            .modal__title {
+                padding-right: 3rem;
+                font-size: 1.65rem;
+            }
+
+            .modal__subtitle {
+                margin-bottom: 1.5rem;
+            }
+
+            .form-group {
+                min-width: 0;
+                margin-bottom: 1.1rem;
+            }
+
+            .form-input,
+            select.form-input {
+                min-width: 0;
+                max-width: 100%;
+                padding: 0.875rem 1rem;
+                font-size: 16px;
+            }
+
+            .lang-toggle {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .lang-toggle-btn {
+                min-width: 0;
+                padding: 0.75rem 0.5rem;
+                white-space: normal;
+            }
+
             .container {
                 padding: 0 1.25rem !important;
             }
@@ -2071,6 +2129,9 @@
                 cursor: pointer;
                 padding: 6px;
                 z-index: 1001;
+                position: relative;
+                pointer-events: auto;
+                touch-action: manipulation;
             }
 
             /* Mobile Navigation Drawer */

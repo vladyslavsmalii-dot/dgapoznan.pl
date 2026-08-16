@@ -45,9 +45,18 @@
 
         /* --- Resets & Base --- */
         html, body {
-            overflow-x: hidden;
+            overflow-x: clip;
             max-width: 100%;
             width: 100%;
+        }
+
+        html {
+            overflow-y: auto;
+        }
+
+        html.scroll-locked,
+        html.scroll-locked body {
+            overflow: hidden;
         }
 
         * {
@@ -739,6 +748,9 @@
                 cursor: pointer;
                 padding: 6px;
                 z-index: 1001;
+                position: relative;
+                pointer-events: auto;
+                touch-action: manipulation;
             }
 
             /* Mobile Navigation Drawer */
