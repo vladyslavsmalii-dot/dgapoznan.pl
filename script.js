@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const openModal = (e) => {
         if (e && e.target.tagName === 'A' && e.target.getAttribute('href') !== '#') return;
         if (e) e.preventDefault();
-        if(modal) {
+        if (modal) {
             // Check for data-course to pre-select it
             const courseToSelect = e.currentTarget.dataset.course;
             if (courseToSelect) {
@@ -137,13 +137,13 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const closeModal = () => {
-        if(modal) {
+        if (modal) {
             modal.classList.remove('active');
             document.body.style.overflow = '';
             setTimeout(() => {
-                if(modalFormContent) modalFormContent.style.display = 'block';
-                if(modalSuccessContent) modalSuccessContent.style.display = 'none';
-                if(contactForm) contactForm.reset();
+                if (modalFormContent) modalFormContent.style.display = 'block';
+                if (modalSuccessContent) modalSuccessContent.style.display = 'none';
+                if (contactForm) contactForm.reset();
                 document.querySelectorAll('.form-input').forEach(i => i.classList.remove('error'));
             }, 500);
         }
@@ -156,10 +156,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    if(closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-    if(modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+    if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-    if(contactForm) {
+    if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             let isValid = true;
@@ -218,30 +218,30 @@ document.addEventListener("DOMContentLoaded", () => {
                     },
                     body: JSON.stringify(payload)
                 })
-                .then(response => response.json())
-                .then(data => {
-                    if (data && data.success) {
-                        if (isContactsPage) {
-                            if (modal) modal.classList.add('active');
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data && data.success) {
+                            if (isContactsPage) {
+                                if (modal) modal.classList.add('active');
+                            } else {
+                                if (modalFormContent) modalFormContent.style.display = 'none';
+                                if (modalSuccessContent) modalSuccessContent.style.display = 'flex';
+                            }
+                            contactForm.reset();
                         } else {
-                            if (modalFormContent) modalFormContent.style.display = 'none';
-                            if (modalSuccessContent) modalSuccessContent.style.display = 'flex';
+                            throw new Error((data && data.message) || "Server response error");
                         }
-                        contactForm.reset();
-                    } else {
-                        throw new Error((data && data.message) || "Server response error");
-                    }
-                })
-                .catch(error => {
-                    console.error('Submission error:', error);
-                    alert("Произошла ошибка при отправке заявки. Пожалуйста, проверьте подключение и попробуйте позже.");
-                })
-                .finally(() => {
-                    if (submitBtn) {
-                        submitBtn.innerText = origBtnText;
-                        submitBtn.disabled = false;
-                    }
-                });
+                    })
+                    .catch(error => {
+                        console.error('Submission error:', error);
+                        alert("Произошла ошибка при отправке заявки. Пожалуйста, проверьте подключение и попробуйте позже.");
+                    })
+                    .finally(() => {
+                        if (submitBtn) {
+                            submitBtn.innerText = origBtnText;
+                            submitBtn.disabled = false;
+                        }
+                    });
             }
         });
     }
@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 5. Scroll Top Logic
     const scrollTopBtn = document.getElementById('scrollTopBtn');
     const featuresSection = document.getElementById('features') || document.querySelector('.programs-content');
-    
+
     if (scrollTopBtn && featuresSection) {
         window.addEventListener('scroll', () => {
             if (window.scrollY > featuresSection.offsetTop - 100) {
@@ -268,10 +268,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const tabs = document.querySelectorAll('.tab-btn');
     const panes = document.querySelectorAll('.tab-pane');
 
-    window.showTab = function(targetId) {
+    window.showTab = function (targetId) {
         const targetTab = Array.from(tabs).find(t => t.dataset.target === targetId);
         const targetPane = document.querySelector(`.tab-pane[data-pane="${targetId}"]`);
-        
+
         if (targetTab && targetPane) {
             // Update buttons
             tabs.forEach(t => t.classList.remove('active'));
@@ -282,9 +282,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 p.classList.remove('active');
                 p.style.opacity = '0';
             });
-            
+
             targetPane.classList.add('active');
-            
+
             // Allow display block to apply before animating opacity
             setTimeout(() => {
                 targetPane.style.opacity = '1';
@@ -292,11 +292,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    if(tabs.length > 0) {
+    if (tabs.length > 0) {
         // Bind click events on tabs
         tabs.forEach(tab => {
             tab.addEventListener('click', (e) => {
-                e.preventDefault(); 
+                e.preventDefault();
                 const target = tab.dataset.target;
                 history.pushState(null, null, `#${target}`);
                 window.showTab(target);
@@ -328,7 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 e.preventDefault(); // Prevent native jump
                 const target = href.split('#')[1];
                 history.pushState(null, null, `#${target}`);
-                if(window.showTab) window.showTab(target);
+                if (window.showTab) window.showTab(target);
             }
         });
     });
