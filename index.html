@@ -54,16 +54,9 @@
         }
 
         /* --- Resets & Base --- */
-        html, body {
+        html {
             overflow-x: hidden;
-            max-width: 100%;
             width: 100%;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
         }
 
         body {
@@ -72,6 +65,14 @@
             background-color: #191919;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         a {
@@ -126,7 +127,6 @@
 
         .logo__text {
             font-size: 1.4rem;
-            /* Specific scaling to match the text stack to the height of the logo */
             line-height: 1.2;
             font-weight: 700;
             letter-spacing: 0;
@@ -266,8 +266,8 @@
         /* --- Hero Section --- */
         .hero {
             position: relative;
-            height: 100vh;
-            min-height: 700px;
+            min-height: 100vh;
+            padding: 160px 0 90px;
             background:
                 linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
                 linear-gradient(90deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.1) 100%),
@@ -287,7 +287,7 @@
 
         .hero__content {
             max-width: 650px;
-            margin-top: -40px;
+            margin-top: -20px;
             margin-left: auto;
             text-align: right;
         }
@@ -297,6 +297,7 @@
             font-weight: 500;
             color: var(--color-text-muted);
             margin-bottom: var(--spacing-sm);
+            text-align: right;
         }
 
         .hero__title {
@@ -305,6 +306,7 @@
             font-weight: 700;
             margin-bottom: var(--spacing-sm);
             letter-spacing: -0.02em;
+            text-align: right;
         }
 
         .hero__desc {
@@ -313,6 +315,8 @@
             color: var(--color-text-muted);
             margin-bottom: var(--spacing-lg);
             max-width: 600px;
+            margin-left: auto;
+            text-align: right;
         }
 
         .hero__actions {

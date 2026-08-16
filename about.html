@@ -266,7 +266,54 @@
             margin: 0 auto;
         }
 
-        /* --- Principles Grid --- */
+        /* --- Stats Grid --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, #222222, #181818);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 2rem 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-primary);
+            box-shadow: 0 10px 30px rgba(242, 123, 65, 0.15);
+        }
+
+        .stat-number {
+            font-size: 2.75rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        @media (max-width: 900px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
         .principles {
             padding: var(--spacing-xl) 0;
         }
@@ -857,8 +904,26 @@
         <section class="approach-hero">
             <div class="container animate-up">
                 <h1 class="section-title">О нас</h1>
-                <p class="section-desc">Dangerous Goods Academy - это команда экспертов в Познани, увлеченных
-                    безопасностью и логистикой. Мы объединяем многолетний опыт, инновации и индивидуальный подход.</p>
+                <p class="section-desc">Dangerous Goods Academy — это специализированный центр в Познани, увлеченный безопасностью и логистикой. Мы объединяем практический опыт, современные методы обучения и индивидуальный подход к каждому курсанту.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">99%</div>
+                        <div class="stat-label">Сдача госэкзамена</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Фокус на ADR</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">EU</div>
+                        <div class="stat-label">Сертификат во всем ЕС</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Языка обучения</div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -866,35 +931,34 @@
         <section class="principles">
             <div class="container">
                 <div class="section-header animate-up" style="text-align: center;">
-                    <h2 class="section-title" style="font-size: 2.5rem;">Наша миссия</h2>
+                    <h2 class="section-title" style="font-size: 2.5rem;">Наша миссия и ценности</h2>
                 </div>
-                <div class="principles__grid"
-                    style="grid-template-columns: 1fr 1fr; max-width: 1000px; margin: 0 auto; gap: 3rem;">
+                <div class="principles__grid" style="max-width: 1100px; margin: 0 auto; gap: 2rem;">
                     <div class="principle-card animate-up">
                         <iconify-icon icon="solar:star-fall-bold-duotone" class="principle-card__icon"></iconify-icon>
                         <h3 class="principle-card__title">Высочайшее качество</h3>
-                        <p class="principle-card__text">Мы предоставляем самое качественное и актуальное обучение по
-                            перевозке опасных грузов, соответствующее всем строгим европейским стандартам безопасности.
-                        </p>
+                        <p class="principle-card__text">Мы предоставляем самое качественное и актуальное обучение по перевозке опасных грузов, полностью соответствующее европейским стандартам безопасности.</p>
                     </div>
                     <div class="principle-card animate-up" style="animation-delay: 0.1s;">
                         <iconify-icon icon="solar:cup-star-bold-duotone" class="principle-card__icon"></iconify-icon>
                         <h3 class="principle-card__title">Успех наших курсантов</h3>
-                        <p class="principle-card__text">Главный приоритет Dangerous Goods Academy — это 99% сдача
-                            экзаменов нашими студентами и их абсолютная уверенность на дорогах.</p>
+                        <p class="principle-card__text">Главный приоритет Dangerous Goods Academy — это уверенные знания наших студентов и их успешная сдача квалификационных экзаменов.</p>
+                    </div>
+                    <div class="principle-card animate-up" style="animation-delay: 0.2s;">
+                        <iconify-icon icon="solar:user-speak-bold-duotone" class="principle-card__icon"></iconify-icon>
+                        <h3 class="principle-card__title">Языковая адаптация</h3>
+                        <p class="principle-card__text">Обучение и поддержка проводятся на том языке, на котором вам комфортно воспринимать сложную техническую информацию.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- === TEAM === -->
-        <section class="process" style="background: #111;">
+        <section class="process" style="background: #151515;">
             <div class="container">
                 <div class="section-header animate-up" style="text-align: center; margin-bottom: 3rem;">
                     <h2 class="section-title" style="font-size: 2.5rem; color: #fff;">Опытная команда</h2>
-                    <p class="section-desc" style="max-width: 700px; margin: 0 auto; margin-top: 1rem;">Наши инструкторы
-                        имеют многолетний практический опыт работы с опасными грузами, регулярно повышают квалификацию и
-                        знают, как донести сложный материал простым языком.</p>
+                    <p class="section-desc" style="max-width: 750px; margin: 1rem auto 0;">Наши инструкторы имеют практический опыт работы с опасными грузами, регулярно повышают квалификацию и доступно объясняют даже самые сложные разделы правила ADR.</p>
                 </div>
             </div>
         </section>
@@ -904,12 +968,10 @@
             <div class="container animate-up">
                 <div class="cta-box">
                     <h2 class="section-title" style="font-size: 2.5rem;">Присоединяйтесь к DGA</h2>
-                    <p class="section-desc" style="margin-bottom: 2rem;">Начните обучение у лучших специалистов ADR в
-                        Познани.</p>
-                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                    <p class="section-desc" style="margin-bottom: 2rem;">Начните обучение у лучших специалистов ADR в Познани.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                         <a href="programs.html" class="btn btn--primary">Выбрать программу</a>
-                        <a href="contacts.html" class="btn btn--secondary"
-                            style="background:#fff; color:#111;">Записаться на курс</a>
+                        <a href="contacts.html" class="btn btn--secondary" style="background:#fff; color:#111;">Записаться на курс</a>
                     </div>
                 </div>
             </div>
