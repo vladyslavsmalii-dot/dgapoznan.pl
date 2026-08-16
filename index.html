@@ -54,6 +54,12 @@
         }
 
         /* --- Resets & Base --- */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+            width: 100%;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -2161,6 +2167,42 @@
         }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem !important;
+            }
+
+            .header {
+                padding: 0.75rem 0;
+            }
+
+            .header .container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 8px;
+            }
+
+            .logo {
+                gap: 8px;
+                max-width: calc(100% - 50px);
+            }
+
+            .logo__icon {
+                height: 38px !important;
+                width: auto;
+            }
+
+            .logo__text {
+                font-size: 0.8rem !important;
+                line-height: 1.1;
+                margin-top: 0 !important;
+                padding-bottom: 0;
+            }
+
+            .logo__text span:last-child {
+                font-size: 0.85rem !important;
+                margin-top: 2px !important;
+            }
 
             .nav,
             .header__action {
@@ -2168,11 +2210,57 @@
             }
 
             .mobile-toggle {
-                display: block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .hero {
+                height: auto !important;
+                min-height: 100vh;
+                padding: 105px 0 50px !important;
+            }
+
+            .hero__content {
+                max-width: 100% !important;
+                margin: 0 !important;
+                text-align: left !important;
+            }
+
+            .hero__subtitle {
+                font-size: 0.85rem !important;
+                text-align: left !important;
             }
 
             .hero__title {
-                font-size: 2.5rem;
+                font-size: 2.1rem !important;
+                line-height: 1.25 !important;
+                margin-bottom: 1rem !important;
+                text-align: left !important;
+                word-break: break-word;
+            }
+
+            .hero__desc {
+                font-size: 0.95rem !important;
+                line-height: 1.55 !important;
+                margin-bottom: 1.5rem !important;
+                text-align: left !important;
+                max-width: 100% !important;
+            }
+
+            .hero__actions {
+                flex-direction: column !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                gap: 10px !important;
+                justify-content: flex-start !important;
+            }
+
+            .hero__actions .btn {
+                width: 100% !important;
+                justify-content: center !important;
+                padding: 0.85rem 1rem !important;
+                font-size: 1rem !important;
             }
 
             .footer__grid {
@@ -2186,16 +2274,12 @@
                 text-align: center;
             }
 
-            .hero__desc {
-                font-size: 1rem;
-            }
-
             .section-title {
-                font-size: 2rem;
+                font-size: 1.85rem !important;
             }
 
             .section-desc {
-                font-size: 1rem;
+                font-size: 0.95rem !important;
             }
 
             .social__grid {
@@ -2204,23 +2288,23 @@
             }
 
             .social-card {
-                min-height: 320px;
-                padding: 1.5rem;
+                min-height: 300px;
+                padding: 1.25rem;
             }
 
             .services__grid {
                 grid-template-columns: 1fr;
             }
 
-            .hero__actions {
+            .pricing-card__actions {
                 flex-direction: column;
-                width: 100%;
-                max-width: 320px;
+                gap: 8px;
             }
 
-            .btn {
-                justify-content: center;
+            .pricing-card__actions .btn {
+                width: 100%;
             }
+        }
 
             .video-card {
                 position: relative;

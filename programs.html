@@ -54,6 +54,12 @@
         }
 
         /* --- Resets & Base --- */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+            width: 100%;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -2084,6 +2090,42 @@
         }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem !important;
+            }
+
+            .header {
+                padding: 0.75rem 0;
+            }
+
+            .header .container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 8px;
+            }
+
+            .logo {
+                gap: 8px;
+                max-width: calc(100% - 50px);
+            }
+
+            .logo__icon {
+                height: 38px !important;
+                width: auto;
+            }
+
+            .logo__text {
+                font-size: 0.8rem !important;
+                line-height: 1.1;
+                margin-top: 0 !important;
+                padding-bottom: 0;
+            }
+
+            .logo__text span:last-child {
+                font-size: 0.85rem !important;
+                margin-top: 2px !important;
+            }
 
             .nav,
             .header__action {
@@ -2091,11 +2133,21 @@
             }
 
             .mobile-toggle {
-                display: block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
-            .hero__title {
-                font-size: 2.5rem;
+            .programs-header {
+                padding: 100px 0 40px 0 !important;
+            }
+
+            .section-title {
+                font-size: 2.1rem !important;
+            }
+
+            .section-desc {
+                font-size: 0.95rem !important;
             }
 
             .footer__grid {
@@ -2108,6 +2160,7 @@
                 gap: var(--spacing-md);
                 text-align: center;
             }
+        }
 
             .hero__desc {
                 font-size: 1rem;
