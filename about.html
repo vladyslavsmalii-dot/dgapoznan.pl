@@ -266,54 +266,7 @@
             margin: 0 auto;
         }
 
-        /* --- Stats Grid --- */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-
-        .stat-card {
-            background: linear-gradient(145deg, #222222, #181818);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 2rem 1.5rem;
-            border-radius: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--color-primary);
-            box-shadow: 0 10px 30px rgba(242, 123, 65, 0.15);
-        }
-
-        .stat-number {
-            font-size: 2.75rem;
-            font-weight: 800;
-            color: var(--color-primary);
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            font-size: 0.95rem;
-            color: var(--color-text-muted);
-            font-weight: 500;
-        }
-
-        @media (max-width: 900px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 500px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        /* --- Principles Grid --- */
         .principles {
             padding: var(--spacing-xl) 0;
         }
@@ -648,9 +601,12 @@
             }
         }
 
+        /* =========================================================
+           MOBILE STYLES (Scoped strictly to max-width: 768px)
+           ========================================================= */
         @media (max-width: 768px) {
             .container {
-                padding: 0 1rem !important;
+                padding: 0 1.25rem !important;
             }
 
             .header {
@@ -662,11 +618,13 @@
                 align-items: center;
                 justify-content: space-between;
                 gap: 8px;
+                position: relative;
             }
 
             .logo {
                 gap: 8px;
-                max-width: calc(100% - 50px);
+                max-width: calc(100% - 55px);
+                z-index: 1001;
             }
 
             .logo__icon {
@@ -686,8 +644,139 @@
                 margin-top: 2px !important;
             }
 
+            .mobile-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: none;
+                border: none;
+                color: #fff;
+                cursor: pointer;
+                padding: 6px;
+                z-index: 1001;
+            }
+
+            /* Mobile Navigation Drawer */
+            .nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(18, 18, 18, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                padding: 85px 1.5rem 2rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                gap: 1.5rem;
+                overflow-y: auto;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px);
+                transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+                z-index: 1000;
+                margin: 0;
+            }
+
+            .header.menu-open .nav {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .nav__list {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.25rem;
+                width: 100%;
+            }
+
+            .nav__link {
+                font-size: 1.25rem;
+                font-weight: 600;
+                color: #fff;
+                padding: 0.25rem 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .nav__dropdown {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 10px;
+                padding: 0.75rem 1rem;
+                margin-top: 0.5rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.6rem;
+                min-width: unset;
+                width: 100%;
+            }
+
+            .nav__dropdown-link {
+                font-size: 1rem;
+                padding: 0.3rem 0;
+                color: var(--color-text-muted);
+            }
+
+            .header__action {
+                display: none;
+            }
+
+            .header.menu-open .header__action {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                margin-top: 1rem;
+                padding-top: 1.5rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .header.menu-open .header__action .lang-switcher {
+                width: 100%;
+                margin: 0;
+            }
+
+            .header.menu-open .header__action .lang-switcher__btn {
+                width: 100%;
+                justify-content: space-between;
+                padding: 0.75rem 1rem;
+            }
+
+            .header.menu-open .header__action .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 0.85rem 1rem;
+            }
+
             .principles__grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+                max-width: 100% !important;
+                margin-top: 1.5rem !important;
+            }
+
+            .principles {
+                padding: 3.5rem 0;
+            }
+
+            .principle-card {
+                min-width: 0;
+                padding: 1.5rem;
+            }
+
+            .principle-card__title,
+            .principle-card__text {
+                overflow-wrap: anywhere;
             }
 
             .approach-hero {
@@ -696,17 +785,6 @@
 
             .section-title {
                 font-size: 2.1rem !important;
-            }
-
-            .nav,
-            .header__action {
-                display: none;
-            }
-
-            .mobile-toggle {
-                display: flex;
-                align-items: center;
-                justify-content: center;
             }
 
             .footer__grid {
@@ -719,122 +797,6 @@
                 gap: var(--spacing-md);
                 text-align: center;
             }
-        }
-        /* --- Mobile Menu Overlay --- */
-        .mobile-menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(18, 18, 18, 0.96);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            z-index: 2500;
-            display: flex;
-            flex-direction: column;
-            padding: 2rem 1.5rem;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-20px);
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow-y: auto;
-        }
-
-        .mobile-menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .mobile-menu-close {
-            align-self: flex-end;
-            background: transparent;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            padding: 0.5rem;
-            transition: transform 0.2s ease;
-        }
-
-        .mobile-menu-close:hover {
-            transform: scale(1.1);
-            color: var(--color-primary);
-        }
-
-        .mobile-menu-content {
-            margin-top: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .mobile-menu-content .nav {
-            display: flex;
-            flex-direction: column;
-            margin: 0;
-        }
-
-        .mobile-menu-content .nav__list {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1.25rem;
-            width: 100%;
-        }
-
-        .mobile-menu-content .nav__link {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .mobile-menu-content .nav__dropdown {
-            position: static;
-            opacity: 1;
-            visibility: visible;
-            transform: none;
-            background: transparent;
-            border: none;
-            padding: 0.5rem 0 0 1rem;
-            box-shadow: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .mobile-menu-content .nav__dropdown-link {
-            font-size: 1.05rem;
-            padding: 0.25rem 0;
-            color: var(--color-text-muted);
-        }
-
-        .mobile-menu-content .header__action {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            align-items: stretch;
-            margin-top: 1rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu-content .lang-switcher {
-            margin: 0;
-            width: 100%;
-        }
-
-        .mobile-menu-content .lang-switcher__btn {
-            width: 100%;
-            justify-content: space-between;
-            padding: 0.85rem 1rem;
-            font-size: 1rem;
-        }
-
-        .mobile-menu-content .btn {
-            width: 100%;
-            justify-content: center;
-            padding: 1rem;
-            font-size: 1.1rem;
         }
     </style>
 </head>
@@ -904,26 +866,8 @@
         <section class="approach-hero">
             <div class="container animate-up">
                 <h1 class="section-title">О нас</h1>
-                <p class="section-desc">Dangerous Goods Academy — это специализированный центр в Познани, увлеченный безопасностью и логистикой. Мы объединяем практический опыт, современные методы обучения и индивидуальный подход к каждому курсанту.</p>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">99%</div>
-                        <div class="stat-label">Сдача госэкзамена</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">Фокус на ADR</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">EU</div>
-                        <div class="stat-label">Сертификат во всем ЕС</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">3</div>
-                        <div class="stat-label">Языка обучения</div>
-                    </div>
-                </div>
+                <p class="section-desc">Dangerous Goods Academy - это команда экспертов в Познани, увлеченных
+                    безопасностью и логистикой. Мы объединяем многолетний опыт, инновации и индивидуальный подход.</p>
             </div>
         </section>
 
@@ -931,34 +875,35 @@
         <section class="principles">
             <div class="container">
                 <div class="section-header animate-up" style="text-align: center;">
-                    <h2 class="section-title" style="font-size: 2.5rem;">Наша миссия и ценности</h2>
+                    <h2 class="section-title" style="font-size: 2.5rem;">Наша миссия</h2>
                 </div>
-                <div class="principles__grid" style="max-width: 1100px; margin: 0 auto; gap: 2rem;">
+                <div class="principles__grid"
+                    style="grid-template-columns: 1fr 1fr; max-width: 1000px; margin: 0 auto; gap: 3rem;">
                     <div class="principle-card animate-up">
                         <iconify-icon icon="solar:star-fall-bold-duotone" class="principle-card__icon"></iconify-icon>
                         <h3 class="principle-card__title">Высочайшее качество</h3>
-                        <p class="principle-card__text">Мы предоставляем самое качественное и актуальное обучение по перевозке опасных грузов, полностью соответствующее европейским стандартам безопасности.</p>
+                        <p class="principle-card__text">Мы предоставляем самое качественное и актуальное обучение по
+                            перевозке опасных грузов, соответствующее всем строгим европейским стандартам безопасности.
+                        </p>
                     </div>
                     <div class="principle-card animate-up" style="animation-delay: 0.1s;">
                         <iconify-icon icon="solar:cup-star-bold-duotone" class="principle-card__icon"></iconify-icon>
                         <h3 class="principle-card__title">Успех наших курсантов</h3>
-                        <p class="principle-card__text">Главный приоритет Dangerous Goods Academy — это уверенные знания наших студентов и их успешная сдача квалификационных экзаменов.</p>
-                    </div>
-                    <div class="principle-card animate-up" style="animation-delay: 0.2s;">
-                        <iconify-icon icon="solar:user-speak-bold-duotone" class="principle-card__icon"></iconify-icon>
-                        <h3 class="principle-card__title">Языковая адаптация</h3>
-                        <p class="principle-card__text">Обучение и поддержка проводятся на том языке, на котором вам комфортно воспринимать сложную техническую информацию.</p>
+                        <p class="principle-card__text">Главный приоритет Dangerous Goods Academy — это 99% сдача
+                            экзаменов нашими студентами и их абсолютная уверенность на дорогах.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- === TEAM === -->
-        <section class="process" style="background: #151515;">
+        <section class="process" style="background: #111;">
             <div class="container">
                 <div class="section-header animate-up" style="text-align: center; margin-bottom: 3rem;">
                     <h2 class="section-title" style="font-size: 2.5rem; color: #fff;">Опытная команда</h2>
-                    <p class="section-desc" style="max-width: 750px; margin: 1rem auto 0;">Наши инструкторы имеют практический опыт работы с опасными грузами, регулярно повышают квалификацию и доступно объясняют даже самые сложные разделы правила ADR.</p>
+                    <p class="section-desc" style="max-width: 700px; margin: 0 auto; margin-top: 1rem;">Наши инструкторы
+                        имеют многолетний практический опыт работы с опасными грузами, регулярно повышают квалификацию и
+                        знают, как донести сложный материал простым языком.</p>
                 </div>
             </div>
         </section>
@@ -968,10 +913,12 @@
             <div class="container animate-up">
                 <div class="cta-box">
                     <h2 class="section-title" style="font-size: 2.5rem;">Присоединяйтесь к DGA</h2>
-                    <p class="section-desc" style="margin-bottom: 2rem;">Начните обучение у лучших специалистов ADR в Познани.</p>
-                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <p class="section-desc" style="margin-bottom: 2rem;">Начните обучение у лучших специалистов ADR в
+                        Познани.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
                         <a href="programs.html" class="btn btn--primary">Выбрать программу</a>
-                        <a href="contacts.html" class="btn btn--secondary" style="background:#fff; color:#111;">Записаться на курс</a>
+                        <a href="contacts.html" class="btn btn--secondary"
+                            style="background:#fff; color:#111;">Записаться на курс</a>
                     </div>
                 </div>
             </div>

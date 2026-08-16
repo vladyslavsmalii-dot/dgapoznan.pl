@@ -1901,197 +1901,12 @@
             }
         }
 
-        /* --- Mobile Menu Overlay --- */
-        .mobile-menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(18, 18, 18, 0.96);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            z-index: 2500;
-            display: flex;
-            flex-direction: column;
-            padding: 2rem 1.5rem;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-20px);
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow-y: auto;
-        }
-
-        .mobile-menu-overlay.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .mobile-menu-close {
-            align-self: flex-end;
-            background: transparent;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            padding: 0.5rem;
-            transition: transform 0.2s ease;
-        }
-
-        .mobile-menu-close:hover {
-            transform: scale(1.1);
-            color: var(--color-primary);
-        }
-
-        .mobile-menu-content {
-            margin-top: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .mobile-menu-content .nav {
-            display: flex;
-            flex-direction: column;
-            margin: 0;
-        }
-
-        .mobile-menu-content .nav__list {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1.25rem;
-            width: 100%;
-        }
-
-        .mobile-menu-content .nav__link {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .mobile-menu-content .nav__dropdown {
-            position: static;
-            opacity: 1;
-            visibility: visible;
-            transform: none;
-            background: transparent;
-            border: none;
-            padding: 0.5rem 0 0 1rem;
-            box-shadow: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .mobile-menu-content .nav__dropdown-link {
-            font-size: 1.05rem;
-            padding: 0.25rem 0;
-            color: var(--color-text-muted);
-        }
-
-        .mobile-menu-content .header__action {
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            align-items: stretch;
-            margin-top: 1rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu-content .lang-switcher {
-            margin: 0;
-            width: 100%;
-        }
-
-        .mobile-menu-content .lang-switcher__btn {
-            width: 100%;
-            justify-content: space-between;
-            padding: 0.85rem 1rem;
-            font-size: 1rem;
-        }
-
-        .mobile-menu-content .btn {
-            width: 100%;
-            justify-content: center;
-            padding: 1rem;
-            font-size: 1.1rem;
-        }
-
-        /* Mobile Adjustments for Modal & Tabs */
-        @media (max-width: 600px) {
-            .modal__container {
-                width: 94%;
-                padding: 1.75rem 1.25rem;
-                border-radius: 20px;
-                max-height: 90vh;
-                overflow-y: auto;
-            }
-
-            .modal__title {
-                font-size: 1.6rem;
-            }
-
-            .modal__subtitle {
-                font-size: 0.9rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .lang-toggle-btn {
-                padding: 0.85rem 0.5rem;
-                font-size: 0.95rem;
-            }
-
-            .form-input {
-                padding: 0.85rem 1rem;
-                font-size: 0.95rem;
-            }
-
-            .course-detail__info {
-                padding: 1.25rem;
-            }
-
-            .course-detail__title {
-                font-size: 1.6rem;
-            }
-        }
-
-        /* --- Responsive --- */
-        @media (max-width: 1024px) {
-            .footer__grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .nav {
-                margin-left: 2rem;
-            }
-
-            .hero__title {
-                font-size: 3.25rem;
-            }
-
-            .container {
-                padding: 0 var(--spacing-lg);
-            }
-
-            .video-card {
-                bottom: var(--spacing-lg);
-                left: var(--spacing-lg);
-            }
-
-            .services__grid {
-                gap: var(--spacing-md);
-            }
-
-            .features__grid {
-                display: flex;
-                flex-direction: column;
-            }
-        }
-
+        /* =========================================================
+           MOBILE STYLES (Scoped strictly to max-width: 768px)
+           ========================================================= */
         @media (max-width: 768px) {
             .container {
-                padding: 0 1rem !important;
+                padding: 0 1.25rem !important;
             }
 
             .header {
@@ -2103,11 +1918,13 @@
                 align-items: center;
                 justify-content: space-between;
                 gap: 8px;
+                position: relative;
             }
 
             .logo {
                 gap: 8px;
-                max-width: calc(100% - 50px);
+                max-width: calc(100% - 55px);
+                z-index: 1001;
             }
 
             .logo__icon {
@@ -2127,15 +1944,118 @@
                 margin-top: 2px !important;
             }
 
-            .nav,
-            .header__action {
-                display: none;
-            }
-
             .mobile-toggle {
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                background: none;
+                border: none;
+                color: #fff;
+                cursor: pointer;
+                padding: 6px;
+                z-index: 1001;
+            }
+
+            /* Mobile Navigation Drawer */
+            .nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(18, 18, 18, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                padding: 85px 1.5rem 2rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                gap: 1.5rem;
+                overflow-y: auto;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px);
+                transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+                z-index: 1000;
+                margin: 0;
+            }
+
+            .header.menu-open .nav {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+
+            .nav__list {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.25rem;
+                width: 100%;
+            }
+
+            .nav__link {
+                font-size: 1.25rem;
+                font-weight: 600;
+                color: #fff;
+                padding: 0.25rem 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .nav__dropdown {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                background: rgba(255, 255, 255, 0.04);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 10px;
+                padding: 0.75rem 1rem;
+                margin-top: 0.5rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.6rem;
+                min-width: unset;
+                width: 100%;
+            }
+
+            .nav__dropdown-link {
+                font-size: 1rem;
+                padding: 0.3rem 0;
+                color: var(--color-text-muted);
+            }
+
+            .header__action {
+                display: none;
+            }
+
+            .header.menu-open .header__action {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                margin-top: 1rem;
+                padding-top: 1.5rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .header.menu-open .header__action .lang-switcher {
+                width: 100%;
+                margin: 0;
+            }
+
+            .header.menu-open .header__action .lang-switcher__btn {
+                width: 100%;
+                justify-content: space-between;
+                padding: 0.75rem 1rem;
+            }
+
+            .header.menu-open .header__action .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 0.85rem 1rem;
             }
 
             .programs-header {
@@ -2276,53 +2196,43 @@
 
         .tabs-nav {
             display: flex;
-            background: #181818;
-            border-radius: 16px;
-            padding: 6px;
-            gap: 8px;
+            background: #222;
+            border-radius: var(--border-radius-md);
+            padding: 0.5rem;
+            gap: 0.5rem;
             overflow-x: auto;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
         .tabs-nav::-webkit-scrollbar {
             display: none;
         }
 
-        .tabs-nav {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
         .tab-btn {
             flex: 1;
-            padding: 0.9rem 1.25rem;
+            padding: 1rem 1.5rem;
             background: transparent;
-            border: 1px solid transparent;
-            color: #a0a0a0;
-            font-size: 0.95rem;
+            border: none;
+            color: var(--color-text-muted);
+            font-size: 1rem;
             font-weight: 600;
-            border-radius: 12px;
+            border-radius: var(--border-radius-sm);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s ease;
             white-space: nowrap;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
         }
 
-        .tab-btn:hover:not(.active) {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.06);
+        .tab-btn:hover {
+            color: var(--color-text-light);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .tab-btn.active {
-            color: #ffffff;
-            background: linear-gradient(135deg, var(--color-primary), #e06328);
-            border-color: rgba(242, 123, 65, 0.4);
-            box-shadow: 0 4px 20px rgba(242, 123, 65, 0.4);
-            transform: translateY(-1px);
+            color: #191919;
+            background: var(--color-primary);
+            box-shadow: 0 4px 10px rgba(242, 123, 65, 0.3);
         }
 
         .tab-pane {
@@ -2511,22 +2421,10 @@
             <div class="container animate-up delay-1">
                 <div class="tabs-container">
                     <div class="tabs-nav">
-                        <button class="tab-btn active" data-target="basic">
-                            <iconify-icon icon="solar:document-bold-duotone" width="20"></iconify-icon>
-                            <span>Базовый</span>
-                        </button>
-                        <button class="tab-btn" data-target="tanks">
-                            <iconify-icon icon="solar:bus-bold-duotone" width="20"></iconify-icon>
-                            <span>Цистерны</span>
-                        </button>
-                        <button class="tab-btn" data-target="class1">
-                            <iconify-icon icon="solar:bomb-bold-duotone" width="20"></iconify-icon>
-                            <span>Класс 1</span>
-                        </button>
-                        <button class="tab-btn" data-target="class7">
-                            <iconify-icon icon="mdi:radioactive" width="20"></iconify-icon>
-                            <span>Класс 7</span>
-                        </button>
+                        <button class="tab-btn active" data-target="basic">Базовый</button>
+                        <button class="tab-btn" data-target="tanks">Цистерны</button>
+                        <button class="tab-btn" data-target="class1">Класс 1</button>
+                        <button class="tab-btn" data-target="class7">Класс 7</button>
                     </div>
 
                     <div class="tabs-content">
