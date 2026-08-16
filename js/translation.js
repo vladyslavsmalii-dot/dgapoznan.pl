@@ -174,7 +174,13 @@ const dictionary = {
         "Обязанности участников перевозки и алгоритм действий в экстренных ситуациях.": "Responsibilities of participants in transport and action algorithms in emergency situations.",
         "Использование огнетушителей и средств индивидуальной защиты (СИЗ).": "Use of fire extinguishers and personal protective equipment (PPE).",
         "Правила совместной погрузки и ограничения движения в туннелях.": "Rules for mixed loading and traffic restrictions in tunnels.",
-        "Оставить заявку на Базовый": "Submit Request for Basic"
+        "Оставить заявку на Базовый": "Submit Request for Basic",
+        "Расписание и стоимость (Июль 2026)": "Schedule and Pricing (July 2026)",
+        "Курсы на русском": "Courses in Russian",
+        "Курсы на английском": "Courses in English",
+        "Ближайшие группы:": "Upcoming groups:",
+        "(Базовый + Цистерны)": "(Basic + Tanks)",
+        "по договоренности": "by agreement"
     },
     "pl": {
         "Программы": "Programy",
@@ -350,7 +356,13 @@ const dictionary = {
         "Обязанности участников перевозки и алгоритм действий в экстренных ситуациях.": "Obowiązki uczestników przewozu oraz procedury postępowania w sytuacjach awaryjnych.",
         "Использование огнетушителей и средств индивидуальной защиты (СИЗ).": "Użycie gaśnic oraz środków ochrony indywidualnej (ŚOI).",
         "Правила совместной погрузки и ограничения движения в туннелях.": "Zasady wspólnego załadunku oraz ograniczenia ruchu w tunelach.",
-        "Оставить заявку на Базовый": "Zostaw wnioseк na Podstawowy"
+        "Оставить заявку на Базовый": "Zostaw wnioseк na Podstawowy",
+        "Расписание и стоимость (Июль 2026)": "Harmonogram i cennik (Lipiec 2026)",
+        "Курсы на русском": "Kursy po rosyjsku",
+        "Курсы на английском": "Kursy po angielsku",
+        "Ближайшие группы:": "Najbliższe grupy:",
+        "(Базовый + Цистерны)": "(Podstawowy + Cysterny)",
+        "по договоренности": "do uzgodnienia"
     },
     "uk": {
         "Программы": "Програми",
@@ -525,7 +537,13 @@ const dictionary = {
         "Обязанности участников перевозки и алгоритм действий в экстренных ситуациях.": "Обов'язки учасників перевезення та алгоритм дій у екстрених ситуаціях.",
         "Использование огнетушителей и средств индивидуальной защиты (СИЗ).": "Використання вогнегасників та засобів індивідуального захисту (ЗІЗ).",
         "Правила совместной погрузки и ограничения движения в туннелях.": "Правила спільного завантаження та обмеження руху в тунелях.",
-        "Оставить заявку на Базовый": "Залишити заявку на Базовий"
+        "Оставить заявку на Базовый": "Залишити заявку на Базовий",
+        "Расписание и стоимость (Июль 2026)": "Розклад та вартість (Липень 2026)",
+        "Курсы на русском": "Курси російською",
+        "Курсы на английском": "Курси англійською",
+        "Ближайшие группы:": "Найближчі групи:",
+        "(Базовый + Цистерны)": "(Базовий + Цистерни)",
+        "по договоренности": "за домовленістю"
     }
 };
 
@@ -587,9 +605,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Update switcher UI
         const btn = document.querySelector('.lang-switcher__btn');
         if (btn) {
-            const icon = btn.querySelector('iconify-icon');
             const text = btn.querySelector('span');
-            if (icon) icon.setAttribute('icon', flagMapping[lang] || 'twemoji:flag-russia');
             if (text) text.textContent = lang.toUpperCase();
         }
 
