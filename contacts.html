@@ -457,6 +457,35 @@
             transform: translateY(20px);
         }
 
+        /* Lang Toggle in Form */
+        .lang-toggle {
+            display: flex;
+            gap: 8px;
+        }
+        .lang-toggle-btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            background: #252525;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-main);
+            text-align: center;
+        }
+        .lang-toggle-btn.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: #fff;
+        }
+        .lang-toggle-btn:hover:not(.active) {
+            border-color: var(--color-primary);
+            color: var(--color-text-light);
+        }
+
         .animate-up.in-view {
             animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
@@ -651,6 +680,137 @@
             color: #4ade80;
             margin-bottom: 1.5rem;
         }
+        /* --- Mobile Menu Overlay --- */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(18, 18, 18, 0.96);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 2500;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow-y: auto;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mobile-menu-close {
+            align-self: flex-end;
+            background: transparent;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .mobile-menu-close:hover {
+            transform: scale(1.1);
+            color: var(--color-primary);
+        }
+
+        .mobile-menu-content {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .mobile-menu-content .nav {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        .mobile-menu-content .nav__list {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.25rem;
+            width: 100%;
+        }
+
+        .mobile-menu-content .nav__link {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .mobile-menu-content .nav__dropdown {
+            position: static;
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+            background: transparent;
+            border: none;
+            padding: 0.5rem 0 0 1rem;
+            box-shadow: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .mobile-menu-content .nav__dropdown-link {
+            font-size: 1.05rem;
+            padding: 0.25rem 0;
+            color: var(--color-text-muted);
+        }
+
+        .mobile-menu-content .header__action {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            align-items: stretch;
+            margin-top: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu-content .lang-switcher {
+            margin: 0;
+            width: 100%;
+        }
+
+        .mobile-menu-content .lang-switcher__btn {
+            width: 100%;
+            justify-content: space-between;
+            padding: 0.85rem 1rem;
+            font-size: 1rem;
+        }
+
+        .mobile-menu-content .btn {
+            width: 100%;
+            justify-content: center;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav, .header__action {
+                display: none;
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .online-kontakt {
+                padding: 1.5rem;
+            }
+            .contact-form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
@@ -687,25 +847,20 @@
             <div class="header__action">
                 <div class="lang-switcher" id="langSwitcher">
                     <button class="lang-switcher__btn">
-                        <iconify-icon icon="twemoji:flag-russia" class="flag-icon"></iconify-icon>
                         <span>RU</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="14"></iconify-icon>
                     </button>
                     <div class="lang-switcher__dropdown">
                         <a href="#" class="lang-switcher__item active" data-lang="ru">
-                            <iconify-icon icon="twemoji:flag-russia" class="flag-icon"></iconify-icon>
                             <span>Русский (RU)</span>
                         </a>
                         <a href="#" class="lang-switcher__item" data-lang="uk">
-                            <iconify-icon icon="twemoji:flag-ukraine" class="flag-icon"></iconify-icon>
                             <span>Українська (UA)</span>
                         </a>
                         <a href="#" class="lang-switcher__item" data-lang="pl">
-                            <iconify-icon icon="twemoji:flag-poland" class="flag-icon"></iconify-icon>
                             <span>Polski (PL)</span>
                         </a>
                         <a href="#" class="lang-switcher__item" data-lang="en">
-                            <iconify-icon icon="twemoji:flag-united-kingdom" class="flag-icon"></iconify-icon>
                             <span>English (EN)</span>
                         </a>
                     </div>
@@ -792,11 +947,16 @@
                                     </select>
                                 </div>
                                 <div class="c-form-group">
+                                    <label class="c-form-label">Язык обучения</label>
+                                    <div class="lang-toggle">
+                                        <button type="button" class="lang-toggle-btn active" data-lang-val="ru">Русский</button>
+                                        <button type="button" class="lang-toggle-btn" data-lang-val="en">Английский</button>
+                                    </div>
+                                </div>
+                                <div class="c-form-group">
                                     <label class="c-form-label">Дата (ближайший курс)</label>
-                                    <select name="date" class="c-input form-input" required>
-                                        <option value="" disabled selected>Выберите дату</option>
-                                        <option value="15 марта">15 марта</option>
-                                        <option value="30 марта">30 марта</option>
+                                    <select name="date" class="c-input form-input" required disabled>
+                                        <option value="" disabled selected>— Сначала выберите курс —</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="c-submit-btn">Отправить заявку</button>
@@ -893,6 +1053,88 @@
 
     <script src="script.js"></script>
     <script src="js/translation.js"></script>
+    <script>
+    (function () {
+        var SCHEDULE = {
+            'Базовый курс': {
+                ru: [
+                    { v: '29.06–04.07.2026', l: '29.06 – 04.07.2026 — + Цистерны' },
+                    { v: '02.07–04.07.2026', l: '02.07 – 04.07.2026' },
+                    { v: '13.07–18.07.2026', l: '13.07 – 18.07.2026 — + Цистерны' },
+                    { v: '16.07–18.07.2026', l: '16.07 – 18.07.2026' },
+                    { v: '27.07–01.08.2026', l: '27.07 – 01.08.2026 — + Цистерны' },
+                    { v: '30.07–01.08.2026', l: '30.07 – 01.08.2026' }
+                ],
+                en: [
+                    { v: '06.07–08.07.2026-EN', l: '06.07 – 08.07.2026' },
+                    { v: '20.07–22.07.2026-EN', l: '20.07 – 22.07.2026' }
+                ]
+            },
+            'Специализированный: Цистерны': {
+                ru: [
+                    { v: '29.06–04.07.2026-c', l: '29.06 – 04.07.2026 (Базовый + Цистерны)' },
+                    { v: '13.07–18.07.2026-c', l: '13.07 – 18.07.2026 (Базовый + Цистерны)' },
+                    { v: '27.07–01.08.2026-c', l: '27.07 – 01.08.2026 (Базовый + Цистерны)' }
+                ],
+                en: [
+                    { v: '09.07–10.07.2026-EN', l: '09.07 – 10.07.2026' },
+                    { v: '23.07–24.07.2026-EN', l: '23.07 – 24.07.2026' }
+                ]
+            },
+            'Специализированный: Класс 1': {
+                ru: [{ v: 'по договорённости', l: 'По договорённости' }],
+                en: [{ v: 'по договорённости', l: 'По договорённости' }]
+            },
+            'Специализированный: Класс 7': {
+                ru: [{ v: 'по договорённости', l: 'По договорённости' }],
+                en: [{ v: 'по договорённости', l: 'По договорённости' }]
+            }
+        };
+        function initSmartForm(formEl) {
+            if (!formEl) return;
+            var courseSelect = formEl.querySelector('[name="course"]');
+            var dateSelect = formEl.querySelector('[name="date"]');
+            var langBtns = formEl.querySelectorAll('.lang-toggle-btn');
+            if (!courseSelect || !dateSelect) return;
+            var currentLang = 'ru';
+            langBtns.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    langBtns.forEach(function (b) { b.classList.remove('active'); });
+                    btn.classList.add('active');
+                    currentLang = btn.dataset.langVal;
+                    updateDates();
+                });
+            });
+            courseSelect.addEventListener('change', updateDates);
+            function updateDates() {
+                var course = courseSelect.value;
+                var data = SCHEDULE[course];
+                dateSelect.innerHTML = '';
+                if (!data) {
+                    var p = document.createElement('option');
+                    p.value = ''; p.disabled = true; p.selected = true;
+                    p.textContent = '— Сначала выберите курс —';
+                    dateSelect.appendChild(p); dateSelect.disabled = true; return;
+                }
+                var dates = data[currentLang] || [];
+                var ph = document.createElement('option');
+                ph.value = ''; ph.disabled = true; ph.selected = true;
+                ph.textContent = 'Выберите дату';
+                dateSelect.appendChild(ph);
+                dates.forEach(function (d) {
+                    var opt = document.createElement('option');
+                    opt.value = d.v; opt.textContent = d.l;
+                    dateSelect.appendChild(opt);
+                });
+                dateSelect.disabled = false;
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            var form = document.getElementById('contactForm');
+            if (form) initSmartForm(form);
+        });
+    })();
+    </script>
 </body>
 
 </html>

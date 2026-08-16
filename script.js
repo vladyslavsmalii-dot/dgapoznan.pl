@@ -20,6 +20,72 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Mobile Menu Drawer Logic
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const header = document.querySelector('.header');
+
+    if (mobileToggle && header) {
+        let mobileOverlay = document.querySelector('.mobile-menu-overlay');
+
+        if (!mobileOverlay) {
+            mobileOverlay = document.createElement('div');
+            mobileOverlay.className = 'mobile-menu-overlay';
+
+            const nav = header.querySelector('.nav');
+            const headerAction = header.querySelector('.header__action');
+
+            mobileOverlay.innerHTML = `
+                <button class="mobile-menu-close" aria-label="Close Menu">
+                    <iconify-icon icon="solar:close-circle-bold" width="36"></iconify-icon>
+                </button>
+                <div class="mobile-menu-content">
+                    ${nav ? nav.outerHTML : ''}
+                    ${headerAction ? headerAction.outerHTML : ''}
+                </div>
+            `;
+
+            document.body.appendChild(mobileOverlay);
+
+            const closeBtn = mobileOverlay.querySelector('.mobile-menu-close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            // Handle mobile lang switcher inside overlay
+            const mobileLangSwitcher = mobileOverlay.querySelector('.lang-switcher');
+            if (mobileLangSwitcher) {
+                const btn = mobileLangSwitcher.querySelector('.lang-switcher__btn');
+                if (btn) {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        mobileLangSwitcher.classList.toggle('active');
+                    });
+                }
+            }
+
+            // Close menu on link clicks
+            mobileOverlay.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href');
+                    mobileOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    if (href === '#') {
+                        e.preventDefault();
+                        if (typeof openModal === 'function') openModal(e);
+                    }
+                });
+            });
+        }
+
+        mobileToggle.addEventListener('click', () => {
+            mobileOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
     // 3. FAQ Accordion Logic (index.html)
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
@@ -126,31 +192,44 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             if (isValid) {
-                const submitBtn = contactForm.querySelector('button');
-                submitBtn.innerText = 'Отправка...';
-                submitBtn.disabled = true;
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const origBtnText = submitBtn ? submitBtn.innerText : 'Отправить заявку';
+                if (submitBtn) {
+                    submitBtn.innerText = 'Отправка...';
+                    submitBtn.disabled = true;
+                }
 
                 const formData = new FormData(contactForm);
-                // Optional: avoid captcha redirect if confirmed
-                formData.append("_captcha", "false"); 
-                
-                const isContactsPage = window.location.pathname.includes('contacts.html');
-                formData.append("_subject", isContactsPage ? "Новое сообщение (Контакты)" : "Новая заявка на курс ADR!");
+                const payload = {
+                    name: formData.get('name') || '',
+                    phone: formData.get('phone') || '',
+                    email: formData.get('email') || '',
+                    course: formData.get('course') || '',
+                    date: formData.get('date') || '',
+                    message: formData.get('message') || ''
+                };
 
-                fetch("https://formsubmit.co/ajax/vladyslavsmalii@gmail.com", {
+                const isContactsPage = window.location.pathname.includes('contacts.html');
+
+                fetch("/api/contact", {
                     method: "POST",
-                    body: formData,
                     headers: {
-                        'Accept': 'application/json'
-                    }
+                        "Content-Type": "application/json; charset=utf-8"
+                    },
+                    body: JSON.stringify(payload)
                 })
                 .then(response => response.json())
                 .then(data => {
-                    if (isContactsPage) {
-                        if (modal) modal.classList.add('active');
+                    if (data && data.success) {
+                        if (isContactsPage) {
+                            if (modal) modal.classList.add('active');
+                        } else {
+                            if (modalFormContent) modalFormContent.style.display = 'none';
+                            if (modalSuccessContent) modalSuccessContent.style.display = 'flex';
+                        }
+                        contactForm.reset();
                     } else {
-                        if (modalFormContent) modalFormContent.style.display = 'none';
-                        if (modalSuccessContent) modalSuccessContent.style.display = 'flex';
+                        throw new Error((data && data.message) || "Server response error");
                     }
                 })
                 .catch(error => {
@@ -158,9 +237,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     alert("Произошла ошибка при отправке заявки. Пожалуйста, проверьте подключение и попробуйте позже.");
                 })
                 .finally(() => {
-                    submitBtn.innerText = 'Отправить заявку';
-                    submitBtn.disabled = false;
-                    contactForm.reset();
+                    if (submitBtn) {
+                        submitBtn.innerText = origBtnText;
+                        submitBtn.disabled = false;
+                    }
                 });
             }
         });
@@ -252,4 +332,24 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+
+    // 8. Schedule Switcher (index.html)
+    const scheduleBtns = document.querySelectorAll('.schedule-btn');
+    const scheduleLists = document.querySelectorAll('[data-schedule-lang]');
+    if (scheduleBtns.length > 0) {
+        scheduleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                scheduleBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const targetLang = btn.dataset.lang;
+                scheduleLists.forEach(list => {
+                    if (list.dataset.scheduleLang === targetLang) {
+                        list.style.display = 'block';
+                    } else {
+                        list.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
 });

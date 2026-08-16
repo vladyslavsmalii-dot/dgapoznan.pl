@@ -624,6 +624,122 @@
                 text-align: center;
             }
         }
+        /* --- Mobile Menu Overlay --- */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(18, 18, 18, 0.96);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 2500;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow-y: auto;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mobile-menu-close {
+            align-self: flex-end;
+            background: transparent;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .mobile-menu-close:hover {
+            transform: scale(1.1);
+            color: var(--color-primary);
+        }
+
+        .mobile-menu-content {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .mobile-menu-content .nav {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        .mobile-menu-content .nav__list {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.25rem;
+            width: 100%;
+        }
+
+        .mobile-menu-content .nav__link {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .mobile-menu-content .nav__dropdown {
+            position: static;
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+            background: transparent;
+            border: none;
+            padding: 0.5rem 0 0 1rem;
+            box-shadow: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .mobile-menu-content .nav__dropdown-link {
+            font-size: 1.05rem;
+            padding: 0.25rem 0;
+            color: var(--color-text-muted);
+        }
+
+        .mobile-menu-content .header__action {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            align-items: stretch;
+            margin-top: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu-content .lang-switcher {
+            margin: 0;
+            width: 100%;
+        }
+
+        .mobile-menu-content .lang-switcher__btn {
+            width: 100%;
+            justify-content: space-between;
+            padding: 0.85rem 1rem;
+            font-size: 1rem;
+        }
+
+        .mobile-menu-content .btn {
+            width: 100%;
+            justify-content: center;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
     </style>
 </head>
 
@@ -660,25 +776,20 @@
             <div class="header__action">
                 <div class="lang-switcher" id="langSwitcher">
                     <button class="lang-switcher__btn">
-                        <iconify-icon icon="twemoji:flag-russia" class="flag-icon"></iconify-icon>
                         <span>RU</span>
                         <iconify-icon icon="solar:alt-arrow-down-linear" width="14"></iconify-icon>
                     </button>
                     <div class="lang-switcher__dropdown">
                         <a href="#" class="lang-switcher__item active" data-lang="ru">
-                            <iconify-icon icon="twemoji:flag-russia" class="flag-icon"></iconify-icon>
                             <span>Русский (RU)</span>
                         </a>
                         <a href="#" class="lang-switcher__item" data-lang="uk">
-                            <iconify-icon icon="twemoji:flag-ukraine" class="flag-icon"></iconify-icon>
                             <span>Українська (UA)</span>
                         </a>
                         <a href="#" class="lang-switcher__item" data-lang="pl">
-                            <iconify-icon icon="twemoji:flag-poland" class="flag-icon"></iconify-icon>
                             <span>Polski (PL)</span>
                         </a>
                         <a href="#" class="lang-switcher__item" data-lang="en">
-                            <iconify-icon icon="twemoji:flag-united-kingdom" class="flag-icon"></iconify-icon>
                             <span>English (EN)</span>
                         </a>
                     </div>
