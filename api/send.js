@@ -26,7 +26,9 @@ export default async function handler(req, res) {
 ✉️ Email: ${email || "Не указано"}
 📚 Курс: ${course || "Не указано"}
 📅 Дата: ${date || "Не указано"}
-${message ? `\n💬 Сообщение:\n${message}` : ''}
+
+💬 Сообщение:
+${message || "Не указано"}
         `.trim();
 
         const response = await fetch(
